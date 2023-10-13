@@ -137,8 +137,6 @@ public class Simulacion extends javax.swing.JFrame {
             }
         ));
         OptMMU.setAutoscrolls(false);
-        OptMMU.setEnabled(false);
-        OptMMU.setFocusable(false);
         OptMMU.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OptMMU.setShowGrid(true);
         jScrollPane4.setViewportView(OptMMU);
@@ -160,16 +158,12 @@ public class Simulacion extends javax.swing.JFrame {
             }
         ));
         OtherMMU.setAutoscrolls(false);
-        OtherMMU.setEnabled(false);
-        OtherMMU.setFocusable(false);
         OtherMMU.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OtherMMU.setShowGrid(true);
         jScrollPane5.setViewportView(OtherMMU);
 
         labelOtherMMU.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelOtherMMU.setText("MMU - Otro");
-
-        jScrollPane6.setEnabled(false);
 
         OptStats.setBackground(new java.awt.Color(230, 230, 230));
         OptStats.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -184,8 +178,6 @@ public class Simulacion extends javax.swing.JFrame {
         ));
         OptStats.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OptStats.setAutoscrolls(false);
-        OptStats.setEnabled(false);
-        OptStats.setFocusable(false);
         OptStats.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OptStats.setShowGrid(true);
         OptStats.getTableHeader().setResizingAllowed(false);
@@ -213,8 +205,6 @@ public class Simulacion extends javax.swing.JFrame {
         ));
         OtherStats.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OtherStats.setAutoscrolls(false);
-        OtherStats.setEnabled(false);
-        OtherStats.setFocusable(false);
         OtherStats.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OtherStats.setShowGrid(true);
         OtherStats.getTableHeader().setResizingAllowed(false);

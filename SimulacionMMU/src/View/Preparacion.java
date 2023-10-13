@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Aldokler
@@ -20,6 +22,8 @@ public class Preparacion extends javax.swing.JFrame {
         initComponents();
         
     }
+    
+    private static String[] args;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -171,7 +175,16 @@ public class Preparacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StartSimulationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimulationButtonActionPerformed
-        // TODO add your handling code here:
+        
+        int download = JOptionPane.showConfirmDialog(rootPane, "Desea descargar el archivo generado?", "Descargar secuencia de instrucciones", JOptionPane.YES_NO_OPTION);
+        
+        if (download == JOptionPane.YES_OPTION) {
+            //guardar archivo
+        }
+        
+        this.setVisible(false);
+        this.setEnabled(false);
+        Simulacion.main(args);
     }//GEN-LAST:event_StartSimulationButtonActionPerformed
 
     /**
@@ -207,6 +220,8 @@ public class Preparacion extends javax.swing.JFrame {
                 new Preparacion().setVisible(true);
             }
         });
+        
+        Preparacion.args = args;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
