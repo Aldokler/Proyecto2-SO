@@ -7,6 +7,9 @@ package View;
 /**
  *
  * @author Aldokler
+ * 
+ * Imagen de la ram tomada de <a href="https://www.flaticon.es/iconos-gratis/memoria-ram" title="memoria ram iconos">Memoria ram iconos creados por Freepik - Flaticon</a>
+ * 
  */
 public class Preparacion extends javax.swing.JFrame {
 
