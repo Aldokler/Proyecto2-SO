@@ -4,10 +4,26 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jeffr
  */
 public class MMU {
+    ArrayList paginas;
+    ArrayList procesos;
+    
+    public void New(int pid, int size){
+    }
+    public void delete(int pid, int size){
+        
+    }
+    public void kill(int pid, int size){
+        
+    }
+    public void use(int pid, int size){
+        
+    }
     
 }

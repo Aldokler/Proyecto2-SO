@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jeffr
@@ -11,6 +13,7 @@ package Model;
 public class Proceso {
     private int pid;
     private int size;
+    ArrayList paginas;
     
 
     public int getSize() {
@@ -28,20 +31,4 @@ public class Proceso {
     public void setPid(int pid) {
         this.pid = pid;
     }
-    /*
-    public void New(int pid, int size){
-        this.setPid(pid);
-        this.setSize(size);
-    }
-    public void delete(int pid, int size){
-        
-    }
-    public void kill(int pid, int size){
-        
-    }
-    public void use(int pid, int size){
-        
-    }
-    */
-    
 }
