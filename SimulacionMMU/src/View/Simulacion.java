@@ -4,6 +4,7 @@
  */
 package View;
 
+import Model.MMU;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ public class Simulacion extends javax.swing.JFrame {
      */
     public Simulacion() {
         initComponents();
+        OptMMU = new MMU();
+        OtherMMU = new MMU();
     }
 
     /**
@@ -35,16 +38,16 @@ public class Simulacion extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        OptRam = new javax.swing.JTable();
+        OptRamTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        OtherRam = new javax.swing.JTable();
+        OtherRamTable = new javax.swing.JTable();
         labelOtherRam = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        OptMMU = new javax.swing.JTable();
+        OptMMUTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        OtherMMU = new javax.swing.JTable();
+        OtherMMUTable = new javax.swing.JTable();
         labelOtherMMU = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         OptStats = new javax.swing.JTable();
@@ -57,10 +60,10 @@ public class Simulacion extends javax.swing.JFrame {
 
         jScrollPane1.setEnabled(false);
 
-        OptRam.setBackground(new java.awt.Color(230, 230, 230));
-        OptRam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OptRam.setForeground(new java.awt.Color(230, 230, 230));
-        OptRam.setModel(new javax.swing.table.DefaultTableModel(
+        OptRamTable.setBackground(new java.awt.Color(230, 230, 230));
+        OptRamTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OptRamTable.setForeground(new java.awt.Color(230, 230, 230));
+        OptRamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -80,22 +83,22 @@ public class Simulacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        OptRam.setAutoscrolls(false);
-        OptRam.setEnabled(false);
-        OptRam.setFocusable(false);
-        OptRam.setSelectionBackground(new java.awt.Color(187, 187, 187));
-        OptRam.setShowGrid(true);
-        jScrollPane1.setViewportView(OptRam);
+        OptRamTable.setAutoscrolls(false);
+        OptRamTable.setEnabled(false);
+        OptRamTable.setFocusable(false);
+        OptRamTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        OptRamTable.setShowGrid(true);
+        jScrollPane1.setViewportView(OptRamTable);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("MMU - Óptimo");
 
         jScrollPane2.setEnabled(false);
 
-        OtherRam.setBackground(new java.awt.Color(230, 230, 230));
-        OtherRam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtherRam.setForeground(new java.awt.Color(230, 230, 230));
-        OtherRam.setModel(new javax.swing.table.DefaultTableModel(
+        OtherRamTable.setBackground(new java.awt.Color(230, 230, 230));
+        OtherRamTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OtherRamTable.setForeground(new java.awt.Color(230, 230, 230));
+        OtherRamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -115,22 +118,22 @@ public class Simulacion extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        OtherRam.setAutoscrolls(false);
-        OtherRam.setEnabled(false);
-        OtherRam.setFocusable(false);
-        OtherRam.setSelectionBackground(new java.awt.Color(187, 187, 187));
-        OtherRam.setShowGrid(true);
-        jScrollPane2.setViewportView(OtherRam);
+        OtherRamTable.setAutoscrolls(false);
+        OtherRamTable.setEnabled(false);
+        OtherRamTable.setFocusable(false);
+        OtherRamTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        OtherRamTable.setShowGrid(true);
+        jScrollPane2.setViewportView(OtherRamTable);
 
         labelOtherRam.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelOtherRam.setText("RAM - Otro");
 
         jScrollPane4.setEnabled(false);
 
-        OptMMU.setBackground(new java.awt.Color(230, 230, 230));
-        OptMMU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OptMMU.setForeground(new java.awt.Color(230, 230, 230));
-        OptMMU.setModel(new javax.swing.table.DefaultTableModel(
+        OptMMUTable.setBackground(new java.awt.Color(230, 230, 230));
+        OptMMUTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OptMMUTable.setForeground(new java.awt.Color(230, 230, 230));
+        OptMMUTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -138,20 +141,20 @@ public class Simulacion extends javax.swing.JFrame {
                 "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
             }
         ));
-        OptMMU.setAutoscrolls(false);
-        OptMMU.setSelectionBackground(new java.awt.Color(187, 187, 187));
-        OptMMU.setShowGrid(true);
-        jScrollPane4.setViewportView(OptMMU);
+        OptMMUTable.setAutoscrolls(false);
+        OptMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        OptMMUTable.setShowGrid(true);
+        jScrollPane4.setViewportView(OptMMUTable);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("RAM - Óptimo");
 
         jScrollPane5.setEnabled(false);
 
-        OtherMMU.setBackground(new java.awt.Color(230, 230, 230));
-        OtherMMU.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtherMMU.setForeground(new java.awt.Color(230, 230, 230));
-        OtherMMU.setModel(new javax.swing.table.DefaultTableModel(
+        OtherMMUTable.setBackground(new java.awt.Color(230, 230, 230));
+        OtherMMUTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        OtherMMUTable.setForeground(new java.awt.Color(230, 230, 230));
+        OtherMMUTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -159,10 +162,10 @@ public class Simulacion extends javax.swing.JFrame {
                 "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
             }
         ));
-        OtherMMU.setAutoscrolls(false);
-        OtherMMU.setSelectionBackground(new java.awt.Color(187, 187, 187));
-        OtherMMU.setShowGrid(true);
-        jScrollPane5.setViewportView(OtherMMU);
+        OtherMMUTable.setAutoscrolls(false);
+        OtherMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
+        OtherMMUTable.setShowGrid(true);
+        jScrollPane5.setViewportView(OtherMMUTable);
 
         labelOtherMMU.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         labelOtherMMU.setText("MMU - Otro");
@@ -370,13 +373,33 @@ public class Simulacion extends javax.swing.JFrame {
                 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                  */
+                
+                for (int i = 0; i < programa.size(); i++){
+                    int instruction = programa.get(i)[0];
+                    int param = programa.get(i)[1];
+                    int size = 0;
+                    if (instruction == 1){
+                        size = programa.get(i)[2];
+                    }
+                    
+                    
+                    
+                    for (int j = 0; j < instance.OptMMU.paginas.size(); j++){
+                        
+                    }
+                    for (int j = 0; j < instance.OtherMMU.paginas.size(); j++){
+                        
+                    }
+                }
 
             }
         });
         
+        /*
         for (Integer[] number : programa){
             System.out.println(Arrays.toString(number));
         }
+        */
     }
 
     private void changeLabel(int algoritmo){
@@ -401,11 +424,11 @@ public class Simulacion extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable OptMMU;
-    private javax.swing.JTable OptRam;
+    private javax.swing.JTable OptMMUTable;
+    private javax.swing.JTable OptRamTable;
     private javax.swing.JTable OptStats;
-    private javax.swing.JTable OtherMMU;
-    private javax.swing.JTable OtherRam;
+    private javax.swing.JTable OtherMMUTable;
+    private javax.swing.JTable OtherRamTable;
     private javax.swing.JTable OtherStats;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -421,4 +444,6 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel labelOtherRam;
     private javax.swing.JLabel labelOtherStats;
     // End of variables declaration//GEN-END:variables
+
+    private MMU OptMMU, OtherMMU;
 }
