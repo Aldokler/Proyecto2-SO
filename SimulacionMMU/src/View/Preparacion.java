@@ -4,6 +4,13 @@
  */
 package View;
 
+import Logic.AdminArchivos;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,7 +53,7 @@ public class Preparacion extends javax.swing.JFrame {
         PprocessInput = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        seedInput = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1000, 650));
@@ -61,13 +68,18 @@ public class Preparacion extends javax.swing.JFrame {
         });
 
         algorithmInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        algorithmInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Algoritmo>", "FIFO", "Second Chance", "Most Recently Used", "Random" }));
+        algorithmInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Algoritmo>", "FIFO", "Second Chance", "MRU", "Random" }));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Algoritmo a usar");
 
         fileInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         fileInput.setText("Seleccionar Archivo");
+        fileInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileInputActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Secuencia de instrucciones");
@@ -89,7 +101,8 @@ public class Preparacion extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("Semilla");
 
-        jSpinner1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        seedInput.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        seedInput.setModel(new javax.swing.SpinnerNumberModel());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,7 +125,7 @@ public class Preparacion extends javax.swing.JFrame {
                                         .addComponent(jLabel6)
                                         .addGap(68, 68, 68))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(seedInput, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(38, 38, 38)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -152,7 +165,7 @@ public class Preparacion extends javax.swing.JFrame {
                     .addComponent(NoperationsInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PprocessInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(algorithmInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(seedInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
@@ -176,16 +189,86 @@ public class Preparacion extends javax.swing.JFrame {
 
     private void StartSimulationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartSimulationButtonActionPerformed
         
+        if (algorithmInput.getSelectedIndex() == 0){
+            JOptionPane.showConfirmDialog(rootPane, "Seleccione un algoritmo", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int procesos, operaciones, seed;
+        if (archivo == null){
+            if(PprocessInput.getText() == null){
+                PprocessInput.setText("10");
+            }
+            if(NoperationsInput.getText() == null){
+                NoperationsInput.setText("500");
+            }
+            if(seedInput.getValue() == null){
+                seedInput.setValue(0);
+            }
+            try{
+                procesos = Integer.parseInt(PprocessInput.getText());
+                if (procesos <= 0){
+                    procesos = 10;
+                }
+                operaciones = Integer.parseInt(NoperationsInput.getText());
+                if (operaciones <= 0){
+                    operaciones = 500;
+                }
+                seed = (int) seedInput.getValue();
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(rootPane, "Ingrese un número válido", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            try {
+                AdminArchivos.generateProgram(procesos, operaciones, "programa", seed);
+                archivo = "../programa.txt";
+            } catch (IOException ex) {
+                Logger.getLogger(Preparacion.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+            }
+        }
+        
+        /*
         int download = JOptionPane.showConfirmDialog(rootPane, "Desea descargar el archivo generado?", "Descargar secuencia de instrucciones", JOptionPane.YES_NO_OPTION);
         
         if (download == JOptionPane.YES_OPTION) {
             //guardar archivo
-        }
+        }*/
         
         this.setVisible(false);
         this.setEnabled(false);
-        Simulacion.main(args);
+        
+        ArrayList<Integer[]> instrucciones = null;
+        try {
+            instrucciones = AdminArchivos.readProgram(archivo);
+        } catch (IOException ex) {
+            Logger.getLogger(Preparacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (instrucciones == null || instrucciones.size() <= 0){
+            JOptionPane.showConfirmDialog(rootPane, "Unable to read the program :(", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        Simulacion.main(args, algorithmInput.getSelectedIndex(), instrucciones);
     }//GEN-LAST:event_StartSimulationButtonActionPerformed
+
+    private void fileInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileInputActionPerformed
+        JFileChooser archivo = new JFileChooser();
+        int result = archivo.showOpenDialog(rootPane);
+
+        // Comprobar si el usuario seleccionó un archivo
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado
+            File selectedFile = archivo.getSelectedFile();
+            
+            // Aquí puedes realizar acciones con el archivo seleccionado
+            // En este ejemplo, simplemente mostramos la ruta del archivo
+            JOptionPane.showMessageDialog(rootPane,
+                    "Archivo seleccionado: " + selectedFile.getAbsolutePath());
+            
+            this.archivo = selectedFile.getAbsolutePath();
+            fileInput.setText(selectedFile.getName());
+        }
+    }//GEN-LAST:event_fileInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,6 +320,9 @@ public class Preparacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner seedInput;
     // End of variables declaration//GEN-END:variables
+
+    private String archivo = null;
+    
 }

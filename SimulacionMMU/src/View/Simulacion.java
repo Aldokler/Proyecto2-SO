@@ -6,6 +6,8 @@ package View;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -323,7 +325,7 @@ public class Simulacion extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[], int algoritmo, ArrayList<Integer[]> programa) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -351,11 +353,51 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Simulacion().setVisible(true);
+                Simulacion instance = new Simulacion();
+                instance.setVisible(true);
+                instance.changeLabel(algoritmo);
+
+                /*
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+                INSERTAR ALGORITMO Y LÓGICA DEL MAIN AQUÍ
+
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+                 */
+
             }
         });
+        
+        for (Integer[] number : programa){
+            System.out.println(Arrays.toString(number));
+        }
     }
 
+    private void changeLabel(int algoritmo){
+        String text = "Otro";
+        switch(algoritmo){
+            case 1 -> {
+                text = "FIFO";
+            }
+            case 2 -> {
+                text = "Second Chance";
+            }
+            case 3 -> {
+                text = "MRU";
+            }
+            case 4 -> {
+                text = "Random";
+            }
+        }
+        labelOtherMMU.setText("MMU - "+text);
+        labelOtherRam.setText("RAM - "+text);
+        labelOtherStats.setText("Estadísticas - "+text);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable OptMMU;
     private javax.swing.JTable OptRam;
