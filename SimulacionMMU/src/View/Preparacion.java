@@ -220,7 +220,7 @@ public class Preparacion extends javax.swing.JFrame {
             }
             try {
                 AdminArchivos.generateProgram(procesos, operaciones, "programa", seed);
-                archivo = "../programa.txt";
+                archivo = "programa.txt";
             } catch (IOException ex) {
                 Logger.getLogger(Preparacion.class.getName()).log(Level.SEVERE, null, ex);
                 return;

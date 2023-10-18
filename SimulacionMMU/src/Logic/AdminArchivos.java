@@ -103,7 +103,7 @@ public class AdminArchivos {
         if (seed == 0){
             rand = new Random();
         }
-        try (FileWriter fichero = new FileWriter("../" + nombre + ".txt");
+        try (FileWriter fichero = new FileWriter(nombre + ".txt");
             PrintWriter pw = new PrintWriter(fichero)) {
             
             ArrayList<Boolean> punteros = new ArrayList<>();

@@ -324,6 +324,8 @@ public class Simulacion extends javax.swing.JFrame {
     
     /**
      * @param args the command line arguments
+     * @param algoritmo
+     * @param programa
      */
     public static void main(String args[], int algoritmo, ArrayList<Integer[]> programa) {
         /* Set the Nimbus look and feel */
