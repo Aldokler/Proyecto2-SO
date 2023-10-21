@@ -11,8 +11,9 @@ import java.util.ArrayList;
  * @author jeffr
  */
 public class MMU {
-    ArrayList paginas;
-    ArrayList procesos;
+    public ArrayList paginas;
+    public ArrayList procesos;
+    int pages;
     
     public void New(int pid, int size){
     }
