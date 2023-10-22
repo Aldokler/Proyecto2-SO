@@ -383,11 +383,11 @@ public class Simulacion extends javax.swing.JFrame {
                     }
                     
                     
-                    
-                    for (int j = 0; j < instance.OptMMU.paginas.size(); j++){
+                    //// Cambio momentanea a paginas en Ram, arreglar luego
+                    for (int j = 0; j < instance.OptMMU.getRam().length; j++){
                         
                     }
-                    for (int j = 0; j < instance.OtherMMU.paginas.size(); j++){
+                    for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
                         
                     }
                 }
