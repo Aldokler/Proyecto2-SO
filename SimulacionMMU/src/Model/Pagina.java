@@ -4,31 +4,36 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author sharon
  */
 public class Pagina {
+    private int PID;
     private int ID;
     private int DireccionF;
-    private boolean MarkRam;
+    private boolean Marking;
     private int ptr;
     private float size;
+    private Date time;
 
-    public Pagina(int ID, int DireccionF, boolean MarkRam, int ptr, float size) {
-        this.ID = ID;
+    public Pagina(int PID, int ID, int DireccionF, boolean MarkRam, int ptr, float size) {
+        this.PID = PID;
         this.DireccionF = DireccionF;
-        this.MarkRam = MarkRam;
+        this.Marking = MarkRam;
         this.ptr = ptr;
         this.size = size;
+        this.ID = ID;
     }
 
     public int getID() {
-        return ID;
+        return PID;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.PID = ID;
     }
 
     public int getDireccionF() {
@@ -40,11 +45,11 @@ public class Pagina {
     }
 
     public boolean isMarkRam() {
-        return MarkRam;
+        return Marking;
     }
 
     public void setMarkRam(boolean MarkRam) {
-        this.MarkRam = MarkRam;
+        this.Marking = MarkRam;
     }
 
     public int getPtr() {

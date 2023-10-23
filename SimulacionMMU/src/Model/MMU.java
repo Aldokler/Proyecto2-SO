@@ -22,6 +22,7 @@ public class MMU {
     private int relojS = 0;
     private int tiempoAccesoS = 5;
 
+
     public MMU() {
     }
 
@@ -49,7 +50,7 @@ public class MMU {
         } else {
             while (size > 0) {
                 int e = espacios.get(0);
-                Pagina page = new Pagina(pid, e, true, ptrs, Math.abs(size - sizePage));
+                Pagina page = new Pagina(pid, pages, e, true, ptrs, Math.abs(size - sizePage));
                 ram[e] = page;
                 size = size - sizePage;
                 espacios.remove(0);
