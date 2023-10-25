@@ -7,9 +7,16 @@ package View;
 import Model.MMU;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.Timer;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -26,6 +33,7 @@ public class Simulacion extends javax.swing.JFrame {
         OptMMU = new MMU();
         OtherMMU = new MMU();
     }
+    private static Timer timer;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -301,21 +309,35 @@ public class Simulacion extends javax.swing.JFrame {
     //cambia el color de una celda OwO
     //ram.setDefaultRenderer(Object.class, new CustomCellRenderer(row, column));
     static class CustomCellRenderer extends DefaultTableCellRenderer {
-        private int targetRow;
-        private int targetColumn;
+        
+        private int row, column;
+        private Color rgb;
 
-        CustomCellRenderer(int targetRow, int targetColumn) {
-            this.targetRow = targetRow;
-            this.targetColumn = targetColumn;
+        public CustomCellRenderer(int row, int column, Color rgb) {
+            this.row = row;
+            this.column = column;
+            this.rgb = rgb;
         }
 
+        public void setRow(int row) {
+            this.row = row;
+        }
+
+        public void setColumn(int column) {
+            this.column = column;
+        }
+
+        public void setRGB(Color rgb) {
+            this.rgb = rgb;
+        }
+        
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
+            
             // Cambiar el color de fondo de la celda en la fila y columna objetivo
-            if (row == targetRow && column == targetColumn) {
-                cellComponent.setBackground(Color.YELLOW); ///Modificar esta linea para que sea el color del proceso con variables globales
+            if (this.row == row && this.column == column) {
+                cellComponent.setBackground(this.rgb); ///Modificar esta linea para que sea el color del proceso con variables globales
             } else {
                 // Restaurar el color de fondo predeterminado para otras celdas
                 cellComponent.setBackground(table.getBackground());
@@ -361,37 +383,73 @@ public class Simulacion extends javax.swing.JFrame {
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
                 instance.changeLabel(algoritmo);
+                
+                CustomCellRenderer OptRenderer = new CustomCellRenderer(0, 0, new Color(0,0,0));
+                CustomCellRenderer OtherRenderer = new CustomCellRenderer(0, 0, new Color(0,0,0));
 
                 /*
                 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-                INSERTAR ALGORITMO Y LÓGICA DEL MAIN AQUÍ
+                INSERTAR ALGORITMO Y LÓGICA DEL MAIN en el timer, todavía no lo defino
 
                 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
                  */
                 
-                for (int i = 0; i < programa.size(); i++){
-                    int instruction = programa.get(i)[0];
-                    int param = programa.get(i)[1];
-                    int size = 0;
-                    if (instruction == 1){
-                        size = programa.get(i)[2];
-                    }
+                // Configuración del temporizador para actualizar la interfaz a un ritmo de 70bpm
+                timer = new Timer(857, new ActionListener() {
+                    int page = 0;
+                    Color pageColor = new Color(123, 43, 212);
+                    int i = 0;
                     
-                    
-                    //// Cambio momentanea a paginas en Ram, arreglar luego
-                    for (int j = 0; j < instance.OptMMU.getRam().length; j++){
-                        
-                    }
-                    for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
-                        
-                    }
-                }
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // Actualizar la interfaz gráfica dentro del hilo de eventos de Swing
+                        EventQueue.invokeLater(() -> {
+                            if ( i >= programa.size()){
+                                System.out.println("Simulación terminada");
+                                timer.stop();
+                            }
+                            
+                            int instruction = programa.get(i)[0];
+                            int param = programa.get(i)[1];
+                            int size = 0;
+                            if (instruction == 1){
+                                size = programa.get(i)[2];
+                            }
+                            
+                            
+                            OptRenderer.setRow(page/20);
+                            OptRenderer.setColumn(page%20);
+                            OptRenderer.setRGB(pageColor);
+                            instance.OptRamTable.getColumnModel().getColumn(page%20).setCellRenderer(OptRenderer);
+                            ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page/20, page%20);
+                            
+                            OtherRenderer.setRow(page/20);
+                            OtherRenderer.setColumn(page%20);
+                            OtherRenderer.setRGB(pageColor);
+                            instance.OtherRamTable.getColumnModel().getColumn(page%20).setCellRenderer(OtherRenderer);
+                            ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page/20, page%20);
+                            
+                            
+                            //// Cambio momentaneo a paginas en Ram, arreglar luego
+                            for (int j = 0; j < instance.OptMMU.getRam().length; j++){
 
+                            }
+                            for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
+
+                            }
+                            
+                            i++;
+                            page++; //quiten esto
+                        });
+                    }
+                });
+                
+                timer.start();
             }
         });
         
@@ -446,4 +504,5 @@ public class Simulacion extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private MMU OptMMU, OtherMMU;
+    
 }
