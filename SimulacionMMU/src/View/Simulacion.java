@@ -30,8 +30,6 @@ public class Simulacion extends javax.swing.JFrame {
      */
     public Simulacion() {
         initComponents();
-        OptMMU = new MMU();
-        OtherMMU = new MMU();
     }
     private static Timer timer;
 
@@ -380,6 +378,9 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                MMU OptMMU = new MMU();
+                MMU OtherMMU = new MMU();
+        
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
                 instance.changeLabel(algoritmo);
@@ -419,6 +420,25 @@ public class Simulacion extends javax.swing.JFrame {
                             int size = 0;
                             if (instruction == 1){
                                 size = programa.get(i)[2];
+                            }
+                            
+                            switch (instruction){
+                                case 1 -> {
+                                    OptMMU.New(param, size);
+                                    OtherMMU.New(param, size);
+                                }
+                                case 2 -> {
+                                    OptMMU.use(param);
+                                    OtherMMU.use(param);
+                                }
+                                case 3 -> {
+                                    OptMMU.delete(param);
+                                    OtherMMU.delete(param);
+                                }
+                                case 4 -> {
+                                    OptMMU.kill(param);
+                                    OtherMMU.kill(param);
+                                }
                             }
                             
                             

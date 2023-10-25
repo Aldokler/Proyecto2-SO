@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.awt.Color;
+
 /**
  *
  * @author jeffr
@@ -11,15 +13,24 @@ package Model;
 public class Proceso {
     private int pid;
     private float size;
+    private Color color;
 
-    public Proceso(int pid, float size) {
+    public Proceso(int pid, float size, Color color) {
         this.pid = pid;
         this.size = size;
+        this.color = color;
     }
 
     public Proceso() {
     }
     
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public float getSize() {
         return size;
