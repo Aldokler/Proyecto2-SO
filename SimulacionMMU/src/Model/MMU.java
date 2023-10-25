@@ -18,7 +18,7 @@ public class MMU {
     private ArrayList<Proceso> procesos = new ArrayList<Proceso>();
     private int pages = 0;
     private int ptrs = 0;
-    private float sizePage = 4;
+    private float sizePage = 4000;
     private int relojS = 0;
     private int tiempoAccesoS = 5;
 

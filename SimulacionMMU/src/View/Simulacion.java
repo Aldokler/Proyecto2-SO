@@ -147,6 +147,7 @@ public class Simulacion extends javax.swing.JFrame {
                 "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
             }
         ));
+        OptMMUTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OptMMUTable.setAutoscrolls(false);
         OptMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OptMMUTable.setShowGrid(true);
@@ -168,6 +169,7 @@ public class Simulacion extends javax.swing.JFrame {
                 "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
             }
         ));
+        OtherMMUTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OtherMMUTable.setAutoscrolls(false);
         OtherMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
         OtherMMUTable.setShowGrid(true);
@@ -454,7 +456,7 @@ public class Simulacion extends javax.swing.JFrame {
                             instance.OtherRamTable.getColumnModel().getColumn(page%20).setCellRenderer(OtherRenderer);
                             ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page/20, page%20);
                             
-                            
+                            /*
                             //// Cambio momentaneo a paginas en Ram, arreglar luego
                             for (int j = 0; j < instance.OptMMU.getRam().length; j++){
 
@@ -462,6 +464,7 @@ public class Simulacion extends javax.swing.JFrame {
                             for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
 
                             }
+                            */
                             
                             i++;
                             page++; //quiten esto
