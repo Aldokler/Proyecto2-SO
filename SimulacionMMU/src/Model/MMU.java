@@ -48,9 +48,9 @@ public class MMU {
         if (espacios == null) {
             //paginacion
         } else {
-            Date date = new Date(); 
             while (size > 0) {
                 int e = espacios.get(0);
+                Date date = new Date(); 
                 Pagina page = new Pagina(pid, pages, e, true, ptrs, Math.abs(size - sizePage), date);
                 ram[e] = page;
                 size = size - sizePage;
