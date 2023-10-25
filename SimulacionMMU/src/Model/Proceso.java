@@ -4,23 +4,28 @@
  */
 package Model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jeffr
  */
 public class Proceso {
     private int pid;
-    private int size;
-    ArrayList paginas;
+    private float size;
+
+    public Proceso(int pid, float size) {
+        this.pid = pid;
+        this.size = size;
+    }
+
+    public Proceso() {
+    }
     
 
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
     }
 

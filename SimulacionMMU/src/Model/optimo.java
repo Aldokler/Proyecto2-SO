@@ -4,13 +4,16 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author jeffr
  */
 public class optimo implements Algoritmo{
     @Override
-    public void cambiarPaginas() {
-        
+    public Proceso cambiarPaginas(ArrayList<Pagina> paginas, ArrayList<Proceso> procesos){
+      Proceso eliminar = new Proceso();
+      return eliminar;
     }
 }

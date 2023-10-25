@@ -19,22 +19,48 @@ public class Pagina {
     private float size;
     private Date time;
 
-    public Pagina(int PID, int ID, int DireccionF, boolean MarkRam, int ptr, float size) {
+    public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, float size, Date time) {
         this.PID = PID;
+        this.ID = ID;
         this.DireccionF = DireccionF;
-        this.Marking = MarkRam;
+        this.Marking = Marking;
         this.ptr = ptr;
         this.size = size;
-        this.ID = ID;
+        this.time = time;
     }
 
-    public int getID() {
+    public int getPID() {
         return PID;
     }
 
-    public void setID(int ID) {
-        this.PID = ID;
+    public void setPID(int PID) {
+        this.PID = PID;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public boolean isMarking() {
+        return Marking;
+    }
+
+    public void setMarking(boolean Marking) {
+        this.Marking = Marking;
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+    
 
     public int getDireccionF() {
         return DireccionF;

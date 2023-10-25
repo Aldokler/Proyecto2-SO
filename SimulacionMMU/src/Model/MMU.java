@@ -4,8 +4,8 @@
  */
 package Model;
 
-import java.awt.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -43,14 +43,19 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
+        Proceso p = new Proceso(pid, size);
+        if(!procesos.contains(p)){
+            procesos.add(p);
+        }
         int nPaginas = (int) ((size + sizePage - 1) / sizePage);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
         if (espacios == null) {
             //paginacion
         } else {
+            Date date = new Date(); 
             while (size > 0) {
                 int e = espacios.get(0);
-                Pagina page = new Pagina(pid, pages, e, true, ptrs, Math.abs(size - sizePage));
+                Pagina page = new Pagina(pid, pages, e, true, ptrs, Math.abs(size - sizePage), date);
                 ram[e] = page;
                 size = size - sizePage;
                 espacios.remove(0);

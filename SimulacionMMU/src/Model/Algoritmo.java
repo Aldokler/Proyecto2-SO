@@ -4,11 +4,13 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sharon
  */
 public interface Algoritmo {
     
-    public void cambiarPaginas();
+    public Proceso cambiarPaginas(ArrayList<Pagina> paginas, ArrayList<Proceso> procesos);
 }
