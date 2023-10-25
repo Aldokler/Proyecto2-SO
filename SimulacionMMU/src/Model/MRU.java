@@ -4,7 +4,6 @@
  */
 package Model;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +12,8 @@ import java.util.ArrayList;
 public class MRU implements Algoritmo{
 
     @Override
-     public Proceso cambiarPaginas(ArrayList<Pagina> paginas, ArrayList<Proceso> procesos){
-      Proceso eliminar = new Proceso();
-      return eliminar;
+     public int cambiarPaginas(Pagina[] paginas, int pidNuevo){
+         return 0;
     }
     
 }

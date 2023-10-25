@@ -43,10 +43,6 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
-        Proceso p = new Proceso(pid, size);
-        if(!procesos.contains(p)){
-            procesos.add(p);
-        }
         int nPaginas = (int) ((size + sizePage - 1) / sizePage);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
         if (espacios == null) {
