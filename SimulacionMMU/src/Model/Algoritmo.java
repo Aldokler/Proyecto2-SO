@@ -12,5 +12,5 @@ import java.util.ArrayList;
  */
 public interface Algoritmo {
     
-    public int cambiarPaginas(Pagina[] paginas, int pidNuevo);
+    public int cambiarPaginas(Pagina[] paginas);
 }

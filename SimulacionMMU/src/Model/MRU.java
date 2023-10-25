@@ -12,7 +12,7 @@ package Model;
 public class MRU implements Algoritmo{
 
     @Override
-     public int cambiarPaginas(Pagina[] paginas, int pidNuevo){
+     public int cambiarPaginas(Pagina[] paginas){
          return 0;
     }
     

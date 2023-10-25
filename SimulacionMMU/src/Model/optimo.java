@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class optimo implements Algoritmo{
     @Override
-    public int cambiarPaginas(Pagina[] paginas, int pidNuevo){
+    public int cambiarPaginas(Pagina[] paginas){
       return 0;
     }
 }
