@@ -22,7 +22,7 @@ public class MRUAlgoritmo implements Algoritmo{
         for (int i = 0; i <= paginas.length; i++) {
            if (paginas[i] != null) {
                d = paginas[i].getTime();
-               retorno = paginas[i].getPtr();
+               retorno = paginas[i].getID();
                break;
            }
         }
@@ -30,7 +30,7 @@ public class MRUAlgoritmo implements Algoritmo{
         for (int i = 0; i <= paginas.length; i++) {
            if (paginas[i] != null) {
                if(d.compareTo(paginas[i].getTime())>=0){
-                   retorno = paginas[i].getPtr();
+                   retorno = paginas[i].getID();
                }
            }
         } 
