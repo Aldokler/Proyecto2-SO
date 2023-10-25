@@ -5,6 +5,7 @@
 package View;
 
 import Logic.AdminArchivos;
+import Logic.seedSingleton;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -214,12 +215,13 @@ public class Preparacion extends javax.swing.JFrame {
                     operaciones = 500;
                 }
                 seed = (int) seedInput.getValue();
+                seedSingleton.getInstance().setSeed(seed);
             } catch (NumberFormatException e) {
                 JOptionPane.showConfirmDialog(rootPane, "Ingrese un número válido", "Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE);
                 return;
             }
             try {
-                AdminArchivos.generateProgram(procesos, operaciones, "programa", seed);
+                AdminArchivos.generateProgram(procesos, operaciones, "programa");
                 archivo = "programa.txt";
             } catch (IOException ex) {
                 Logger.getLogger(Preparacion.class.getName()).log(Level.SEVERE, null, ex);

@@ -98,7 +98,8 @@ public class AdminArchivos {
         return instrucciones;
     }
     
-    public static void generateProgram(int Procesos, int Noperaciones, String nombre, int seed) throws IOException{
+    public static void generateProgram(int Procesos, int Noperaciones, String nombre) throws IOException{
+        int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
         if (seed == 0){
             rand = new Random();

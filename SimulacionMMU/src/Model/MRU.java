@@ -4,6 +4,8 @@
  */
 package Model;
 
+import Logic.Algoritmo;
+
 
 /**
  *
