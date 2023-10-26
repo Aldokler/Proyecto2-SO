@@ -50,9 +50,14 @@ public class MMU {
     private Queue<Pagina> cola = new LinkedList<Pagina>();
     private Al algoritmo;
     int II;
+    private ArrayList<Integer[]> instrucciones ;
 
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
+    }
+    
+    public MMU(ArrayList<Integer[]> instrucciones) {
+        this.instrucciones = instrucciones;
     }
 
     private ArrayList<Integer> espacioRam(int n) {

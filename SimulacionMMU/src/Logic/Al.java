@@ -5,6 +5,7 @@
 package Logic;
 
 import Model.Pagina;
+import java.util.ArrayList;
 import java.util.Queue;
 
 /**
@@ -14,5 +15,6 @@ import java.util.Queue;
 public abstract class Al {
     public abstract int cambiarPaginas(Pagina[] paginas);
     public abstract int cambiarPaginas(Queue<Pagina> paginas);
+    public abstract int cambiarPaginas(ArrayList<Integer[]> instrucciones,Pagina[] paginas );
   
 }

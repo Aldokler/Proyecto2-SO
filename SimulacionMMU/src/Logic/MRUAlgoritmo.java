@@ -5,6 +5,7 @@
 package Logic;
 
 import Model.Pagina;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Queue;
 
@@ -40,6 +41,11 @@ public class MRUAlgoritmo extends Al{
 
     @Override
     public int cambiarPaginas(Queue<Pagina> paginas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
