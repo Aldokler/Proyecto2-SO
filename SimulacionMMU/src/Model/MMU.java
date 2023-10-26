@@ -111,7 +111,7 @@ public class MMU {
                         if (ram[i].getID() == ID) {
                             disco.add(ram[i]);
                             Date date = new Date();
-                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
                             ram[i] = page;
                             pages++;
                             cola.add(page);
@@ -142,7 +142,7 @@ public class MMU {
                         if (ram[i].getID() == ID) {
                             disco.add(ram[i]);
                             Date date = new Date();
-                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date,this.relojS, rand.nextInt());
                             ram[i] = page;
                             pages++;
                             cola.add(page);
