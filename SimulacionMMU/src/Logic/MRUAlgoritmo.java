@@ -21,7 +21,7 @@ public class MRUAlgoritmo extends Al{
         int retorno = 0;
         Date d = null;
         //obtiene la primera date que encuentra
-        for (int i = 0; i <= paginas.length; i++) {
+        for (int i = 0; i < paginas.length; i++) {
            if (paginas[i] != null) {
                d = paginas[i].getTime();
                retorno = paginas[i].getID();
@@ -29,7 +29,7 @@ public class MRUAlgoritmo extends Al{
            }
         }
         //revisa cual borrar
-        for (int i = 0; i <= paginas.length; i++) {
+        for (int i = 0; i < paginas.length; i++) {
            if (paginas[i] != null) {
                if(d.compareTo(paginas[i].getTime())>=0){
                    retorno = paginas[i].getID();

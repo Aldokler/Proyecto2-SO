@@ -361,7 +361,7 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MMU OptMMU = new MMU(new optimo(), programa);
+                MMU OptMMU = new MMU(programa);
                 MMU OtherMMU = new MMU(algoritmo);
 
                 Simulacion instance = new Simulacion();
@@ -437,7 +437,7 @@ public class Simulacion extends javax.swing.JFrame {
                             if (instruction == 1) {
                                 size = programa.get(i)[2];
                             }
-
+                            OptMMU.setInstruccionCounter(i);
                             switch (instruction) {
                                 case 1 -> {
                                     OptMMU.New(param, size);
@@ -456,6 +456,7 @@ public class Simulacion extends javax.swing.JFrame {
                                     OtherMMU.kill(param);
                                 }
                             }
+                            
 
                             /*
 *******************************************************************************************************************************************************                            
@@ -604,7 +605,7 @@ public class Simulacion extends javax.swing.JFrame {
                             }
                             ArrayList<Pagina> OtherDisk = OtherMMU.getDisco();
                             for (int p = 0; p < OtherRam.length; p++, contadorFila++) {
-                                if (OtherRam[p] != null) {
+                                if (OtherRam[p] != null){
                                     Object[] rowData1 = {
                                         OptRam[p].getID(),
                                         OptRam[p].getPID(),

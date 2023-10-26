@@ -33,7 +33,7 @@ public class optimo extends Al{
             }
         }
         //compara cual va a ser usada mas reciente
-        for (int i = 0; i <= paginas.length; i++) {
+        for (int i = 0; i < paginas.length; i++) {
             if(paginas[i] != null){
                 for(int j=instruccionCount;j <= instrucciones.size();j++){
                     if(instrucciones.get(i)[1] == paginas[i].getPID()){ 
@@ -48,7 +48,7 @@ public class optimo extends Al{
         }
         //si no se encontro que alguna va a volver a ser usada, se devuelve la primera que encuentra
         if(retorno ==0){
-            for (int i = 0; i <= paginas.length; i++) {
+            for (int i = 0; i < paginas.length; i++) {
                 if (paginas[i] != null) {
                     retorno = paginas[i].getID();
                     break;

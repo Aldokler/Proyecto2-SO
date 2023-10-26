@@ -60,9 +60,9 @@ public class MMU {
         this.algoritmo = algoritmo;
     }
     
-    public MMU(Al algoritmo, ArrayList<Integer[]>  instrucciones) {
+    public MMU(ArrayList<Integer[]>  instrucciones) {
         this.instrucciones = instrucciones;
-        this.algoritmo = algoritmo;
+        this.algoritmo = new optimo();
     }
     
     public MMU(int opt) {
@@ -194,7 +194,63 @@ public class MMU {
                 //cearDate date = new Date();
                 // System.out.println("pagiiFIFO  " + ID);
                 //agregamos
-            } else {
+            } else if(algoritmo instanceof optimo){
+                System.out.println("El optimo");
+                int nPaginasCambiar = nPaginas - espacios.size();
+                ArrayList<Integer> IDs = new ArrayList<>();
+
+                while (nPaginasCambiar > 0) {
+                    //  System.out.println("PAGINAAAA  " + pages);
+
+                    int ID = algoritmo.cambiarPaginas(instrucciones, ram, instruccionCounter);
+                    IDs.add(ID);
+                    nPaginasCambiar--;
+
+                }
+
+                int indiceRam = 0;
+
+
+                System.out.println("paginasIDAlg");
+                for (Integer p : IDs) {
+
+                    System.out.println(p);
+
+                }
+
+                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
+
+                    if (ram[indiceRam] != null) {
+                        Integer i = ram[indiceRam].getID();
+                        if (IDs.contains(ram[indiceRam].getID())) {
+                            IDs.remove(i);
+
+                            disco.add(ram[indiceRam]);
+                            ram[indiceRam] = null;
+
+                        }
+                    }
+
+                    indiceRam++;
+
+                }
+
+                for (int i = 0; i < ram.length - 1; i++) {
+
+                    if (ram[i] == null) {
+                        Date date = new Date();
+                        Pagina page = new Pagina(pid, pages, indiceRam, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+                        ram[i] = page;
+                        pages++;
+                        cola.add(page);
+                        sizeKB = sizeKB - sizePage;
+
+                    }
+
+                }
+            }
+            
+            else {
                 System.out.println("No FIFO");
                 int nPaginasCambiar = nPaginas - espacios.size();
                 ArrayList<Integer> IDs = new ArrayList<>();
