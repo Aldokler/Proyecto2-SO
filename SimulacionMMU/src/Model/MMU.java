@@ -38,8 +38,8 @@ public class MMU {
     private double memoriaVirtualUsadaP = 0;
 
     private double memoriaDesperdiciada = 0;
-    
-    private int nPaginaRam = 0; 
+
+    private int nPaginaRam = 0;
     private int nPaginaDisco = 0;
     private int cantidadProcesos = 0;
 
@@ -66,31 +66,31 @@ public class MMU {
         int nPaginas = (int) ((size + sizePage - 1) / sizePage);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
         double sizeKB = size / 1024;
+        
         int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
-        if (seed == 0){
+        if (seed == 0) {
             rand = new Random();
         }
-        Proceso process = new Proceso(pid, size, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-        if(!procesos.contains(process)){
-            procesos.add(process);
-        }// SI NO SIRVE ES POR ESTO
-        /*
-        for (Proceso p : procesos){
-            if (p.getPid() == pid){
-                //no lo agreguere
+        boolean agreguelo = true;
+        for (Proceso p : procesos) {
+            if (p.getPid() == pid) {
+                agreguelo = false;
+                break;
             }
         }
-        procesos.contains(pid);
-        procesos.add(process);
-        */
+        if (agreguelo) {
+            Proceso process = new Proceso(pid, size, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+            procesos.add(process);
+        }
+
         if (espacios == null) {
             //paginacion
         } else {
             while (size > 0) {
                 int e = espacios.get(0);
                 Date date = new Date();
-                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date);
+                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
                 ram[e] = page;
                 size = size - sizePage;
                 espacios.remove(0);
@@ -160,7 +160,7 @@ public class MMU {
 
     public void VirtualMemoryUsed() {
         nPaginaDisco = disco.size();
-        memoriaVirtualUsada =  nPaginaDisco* sizePage;
+        memoriaVirtualUsada = nPaginaDisco * sizePage;
         memoriaVirtualUsadaP = (memoriaVirtualUsada / RamMemory) * 100;
 
     }
@@ -266,7 +266,5 @@ public class MMU {
     public int getCantidadProcesos() {
         return cantidadProcesos;
     }
-    
-    
 
 }
