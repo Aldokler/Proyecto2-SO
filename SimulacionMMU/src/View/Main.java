@@ -20,16 +20,37 @@ public class Main {
      */
     public static void main(String[] args) {
         //Preparacion.main(args);
-        MMU m = new MMU(new FIFO());
-        for (int i = 0; i < 101; i++) {
+        MMU m = new MMU(new RandomAlgorithm());
+        for (int i = 0; i < 100; i++) {
          
             m.New(1, 4096);
-             
+              
 
         }
+        System.out.println("fue");
+         m.New(1, 4096*2+1800);
+        System.out.println("rammmm");
+                for (Pagina p : m.getRam()) {
+                    if (p != null) {
+                        System.out.println(p.getID());
+                    } else {
+                        System.out.println("null");
+                    }
 
+                }
+        
+//        for (Pagina p : m.getRam()) {
+//            if (p != null) {
+//                System.out.println(p.getID());
+//            } else {
+//                System.out.println("null");
+//            }
+//
+//        }
+   // m.New(1, 4096*3+1800);
+      //  m.use(1);
+       /* m.use(2);
         m.use(1);
-        m.use(2);
         m.use(1);
         m.use(1);
         m.use(1);
@@ -40,8 +61,7 @@ public class Main {
         m.use(1);
         m.use(1);
         m.use(1);
-        m.use(1);
-        /*  System.out.println("m.getCantigCEAdadProcesos()");
+          System.out.println("m.getCantigCEAdadProcesos()");
         System.out.println(m.getCantidadProcesos());
         System.out.println(m.getMemoriaRamUsada());
         System.out.println(m.getMemoriaRamUsadaP());
@@ -53,7 +73,7 @@ public class Main {
         System.out.println(m.getTiempoFallos());
         System.out.println(m.getTiempoFallosP());
         System.out.println(m.getnPaginaDisco());
-        System.out.println(m.getnPaginaRam());*/
+        System.out.println(m.getnPaginaRam());
 
         m.delete(1);
          
@@ -90,15 +110,8 @@ public class Main {
        m.delete(103);
       
        m.New(6, 4096*3+1800);
-        m.kill(6);
-        for (Pagina p : m.getRam()) {
-            if (p != null) {
-                System.out.println(p.getID());
-            } else {
-                System.out.println("null");
-            }
-
-        }
+        m.kill(6);*/
+        
     }
 
 }
