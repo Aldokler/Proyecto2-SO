@@ -202,4 +202,50 @@ public class MMU {
         this.sizePage = sizePage;
     }
 
+    public int getRelojS() {
+        return relojS;
+    }
+
+    public int getTiempoFallos() {
+        return tiempoFallos;
+    }
+
+    public double getTiempoFallosP() {
+        return tiempoFallosP;
+    }
+
+    public int getMemoriaRamUsada() {
+        return memoriaRamUsada;
+    }
+
+    public double getMemoriaRamUsadaP() {
+        return memoriaRamUsadaP;
+    }
+
+    public int getMemoriaVirtualUsada() {
+        return memoriaVirtualUsada;
+    }
+
+    public double getMemoriaVirtualUsadaP() {
+        return memoriaVirtualUsadaP;
+    }
+
+    public double getMemoriaDesperdiciada() {
+        return memoriaDesperdiciada;
+    }
+
+    public int getnPaginaRam() {
+        return nPaginaRam;
+    }
+
+    public int getnPaginaDisco() {
+        return nPaginaDisco;
+    }
+
+    public int getCantidadProcesos() {
+        return cantidadProcesos;
+    }
+    
+    
+
 }
