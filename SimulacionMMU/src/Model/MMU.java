@@ -13,15 +13,31 @@ import java.util.Date;
  */
 public class MMU {
 
+    private int sizePage = 4;
+    private int RamMemory = (sizePage * 100);
+    private int tiempoAccesoS = 5;
+
     private Pagina[] ram = new Pagina[100];
     private ArrayList<Pagina> disco = new ArrayList<Pagina>();
+
     private ArrayList<Proceso> procesos = new ArrayList<Proceso>();
     private int pages = 0;
     private int ptrs = 0;
-    private float sizePage = 4000;
     private int relojS = 0;
-    private int tiempoAccesoS = 5;
+    private int tiempoFallos = 0;
 
+    private double tiempoFallosP = 0;
+
+    private int memoriaRamUsada = 0;
+    private double memoriaRamUsadaP = 0;
+
+    private int memoriaVirtualUsada = 0;
+    private double memoriaVirtualUsadaP = 0;
+
+    private double memoriaDesperdiciada = 0;
+    
+    private int nPaginaRam = 0; 
+    private int nPaginaDisco = 0;
 
     public MMU() {
     }
@@ -45,13 +61,14 @@ public class MMU {
     public int New(int pid, float size) {
         int nPaginas = (int) ((size + sizePage - 1) / sizePage);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
+        double sizeKB = size / 1024;
         if (espacios == null) {
             //paginacion
         } else {
             while (size > 0) {
                 int e = espacios.get(0);
-                Date date = new Date(); 
-                Pagina page = new Pagina(pid, pages, e, true, ptrs, Math.abs(size - sizePage), date);
+                Date date = new Date();
+                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date);
                 ram[e] = page;
                 size = size - sizePage;
                 espacios.remove(0);
@@ -78,13 +95,13 @@ public class MMU {
 
     public void kill(int pid) {
         for (Pagina pagina : disco) {
-            if (pagina.getID()== pid) {
+            if (pagina.getID() == pid) {
                 disco.remove(pagina);
             }
         }
 
         for (int i = 0; i < ram.length; i++) {
-            if (ram[i].getID()== pid) {
+            if (ram[i].getID() == pid) {
                 ram[i] = null;
             }
         }
@@ -94,8 +111,7 @@ public class MMU {
         for (Pagina pagina : ram) {
             if (pagina.getPtr() == ptr) {
                 relojS++;
-            }
-            else{
+            } else {
                 relojS = relojS + tiempoAccesoS;
                 //Paginacion
             }
@@ -104,6 +120,40 @@ public class MMU {
 
     public Pagina[] getRam() {
         return ram;
+    }
+
+    public void ramUsed() {
+        memoriaRamUsada = 0;
+        int campos = 0;
+        for (Pagina pagina : ram) {
+            if (pagina != null) {
+                campos++;
+            }
+        }
+        memoriaRamUsadaP = campos;
+        memoriaRamUsada = campos * sizePage;
+        nPaginaRam = campos;
+
+    }
+
+    public void VirtualMemoryUsed() {
+        nPaginaDisco = disco.size();
+        memoriaVirtualUsada =  nPaginaDisco* sizePage;
+        memoriaVirtualUsadaP = (memoriaVirtualUsada / RamMemory) * 100;
+
+    }
+
+    public void s() {
+        tiempoFallosP = (tiempoFallos / relojS) * 100;
+    }
+
+    public void calcularMemoriaFrag() {
+        memoriaDesperdiciada = 0;
+        for (Pagina pagina : ram) {
+            if (pagina != null) {
+                memoriaDesperdiciada = memoriaDesperdiciada + (sizePage - pagina.getSize());
+            }
+        }
     }
 
     public void setRam(Pagina[] ram) {
@@ -146,7 +196,7 @@ public class MMU {
         return sizePage;
     }
 
-    public void setSizePage(float sizePage) {
+    public void setSizePage(int sizePage) {
         this.sizePage = sizePage;
     }
 

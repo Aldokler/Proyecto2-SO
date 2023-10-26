@@ -16,10 +16,10 @@ public class Pagina {
     private int DireccionF;
     private boolean Marking;
     private int ptr;
-    private float size;
+    private double size;
     private Date time;
 
-    public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, float size, Date time) {
+    public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, double size, Date time) {
         this.PID = PID;
         this.ID = ID;
         this.DireccionF = DireccionF;
@@ -86,11 +86,11 @@ public class Pagina {
         this.ptr = ptr;
     }
 
-    public float getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(double size) {
         this.size = size;
     }
     
