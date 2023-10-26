@@ -55,6 +55,7 @@ public class optimo extends Al{
            }
         }
         }
+        System.out.println(retorno);
         return retorno;
     }
    
