@@ -330,12 +330,13 @@ public class MMU {
                     indiceRam++;
                     System.out.println("whilw");
                     if (ram[indiceRam] != null) {
-                        if (ram[indiceRam].getID() == indexs.get(0)) {
+                        Integer i = ram[indiceRam].getID();
+                        if (indexs.contains(ram[indiceRam].getID())) {
+                            indexs.remove(i);
                             disco.add(ram[indiceRam]);
                             ram[indiceRam] = paginasCambiar.get(0);
                             cola.add(paginasCambiar.get(0));
                             paginasCambiar.remove(0);
-                            indexs.remove(0);
                             System.out.println("tamañoIndexID-" + indexs.size());
                             /*System.out.println("Ram");
                                 for (Pagina p : ram) {
