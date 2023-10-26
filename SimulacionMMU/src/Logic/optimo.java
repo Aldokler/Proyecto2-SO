@@ -18,10 +18,10 @@ public class optimo extends Al{
         int retorno = 0;
         int usadaEn = 1000;
         //elige una para comparar
-        for (int i = paginas.length; i <= 0; i--) {
+        for (int i = paginas.length; i < 0; i--) {
             if(paginas[i] != null){
-                for(int j=instruccionCount;j <= instrucciones.size();j++){
-                    if(instrucciones.get(i)[1] == paginas[i].getPID()){
+                for(int j=instruccionCount;j < instrucciones.size();j++){
+                    if(instrucciones.get(j)[1] == paginas[i].getPID()){
                         usadaEn = instrucciones.size()-instruccionCount;
                         retorno = paginas[i].getID();
                         break;
@@ -35,8 +35,8 @@ public class optimo extends Al{
         //compara cual va a ser usada mas reciente
         for (int i = 0; i < paginas.length; i++) {
             if(paginas[i] != null){
-                for(int j=instruccionCount;j <= instrucciones.size();j++){
-                    if(instrucciones.get(i)[1] == paginas[i].getPID()){ 
+                for(int j=instruccionCount;j < instrucciones.size();j++){
+                    if(instrucciones.get(j)[1] == paginas[i].getPID()){ 
                         int usada = instrucciones.size()-instruccionCount;
                         if(usada < usadaEn){
                             usadaEn = instrucciones.size()-instruccionCount;
