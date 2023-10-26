@@ -13,22 +13,15 @@ import java.util.Random;
  */
 public class RandomAlgorithm implements Algoritmo{
 
-    public int cambiarPaginas(Pagina[] paginas, int PID) {
+    @Override
+    public int cambiarPaginas(Pagina[] paginas) {
         int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
         if (seed == 0){
             rand = new Random();
         }
         int page = rand.nextInt(paginas.length);
-        while(paginas[page].getPID() == PID){
-            page = rand.nextInt(paginas.length);
-        }
         return page;
-    }
-
-    @Override
-    public int cambiarPaginas(Pagina[] paginas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
