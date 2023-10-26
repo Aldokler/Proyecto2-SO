@@ -8,6 +8,7 @@ import Logic.Al;
 import Logic.FIFO;
 import Logic.MRUAlgoritmo;
 import Logic.RandomAlgorithm;
+import Logic.optimo;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -58,7 +59,12 @@ public class MMU {
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
     }
-
+    
+    public MMU(Al algoritmo, ArrayList<Integer[]>  instrucciones) {
+        this.instrucciones = instrucciones;
+        this.algoritmo = algoritmo;
+    }
+    
     public MMU(int opt) {
         switch(opt){
             case 1 -> {
@@ -73,10 +79,6 @@ public class MMU {
                 this.algoritmo = new RandomAlgorithm();
             }
         }
-    }
-    
-    public MMU(ArrayList<Integer[]> instrucciones) {
-        this.instrucciones = instrucciones;
     }
 
     public int getInstruccionCounter() {
@@ -189,7 +191,6 @@ public class MMU {
                 //agregamos
             } else {
                 System.out.println("No FIFO");
-
                 int nPaginasCambiar = nPaginas - espacios.size();
                 ArrayList<Integer> IDs = new ArrayList<>();
 
