@@ -21,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -53,7 +54,7 @@ public class Simulacion extends javax.swing.JFrame {
         OtherRamTable = new javax.swing.JTable();
         labelOtherRam = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        OptMMUTable = new javax.swing.JTable();
+        OptMMUTable = new javax.swing.JTable(OptMMUModel);
         jLabel3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         OtherMMUTable = new javax.swing.JTable();
@@ -71,7 +72,7 @@ public class Simulacion extends javax.swing.JFrame {
 
         OptRamTable.setBackground(new java.awt.Color(230, 230, 230));
         OptRamTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OptRamTable.setForeground(new java.awt.Color(230, 230, 230));
+        OptRamTable.setForeground(new java.awt.Color(0, 0, 0));
         OptRamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -106,7 +107,7 @@ public class Simulacion extends javax.swing.JFrame {
 
         OtherRamTable.setBackground(new java.awt.Color(230, 230, 230));
         OtherRamTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtherRamTable.setForeground(new java.awt.Color(230, 230, 230));
+        OtherRamTable.setForeground(new java.awt.Color(0, 0, 0));
         OtherRamTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -141,15 +142,8 @@ public class Simulacion extends javax.swing.JFrame {
 
         OptMMUTable.setBackground(new java.awt.Color(230, 230, 230));
         OptMMUTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OptMMUTable.setForeground(new java.awt.Color(230, 230, 230));
-        OptMMUTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
-            }
-        ));
+        OptMMUTable.setForeground(new java.awt.Color(0, 0, 0));
+        OptMMUTable.setModel(OptMMUModel);
         OptMMUTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OptMMUTable.setAutoscrolls(false);
         OptMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
@@ -163,15 +157,8 @@ public class Simulacion extends javax.swing.JFrame {
 
         OtherMMUTable.setBackground(new java.awt.Color(230, 230, 230));
         OtherMMUTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtherMMUTable.setForeground(new java.awt.Color(230, 230, 230));
-        OtherMMUTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "PAGE ID", "PID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"
-            }
-        ));
+        OtherMMUTable.setForeground(new java.awt.Color(0, 0, 0));
+        OtherMMUTable.setModel(OtherMMUModel);
         OtherMMUTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OtherMMUTable.setAutoscrolls(false);
         OtherMMUTable.setSelectionBackground(new java.awt.Color(187, 187, 187));
@@ -183,15 +170,8 @@ public class Simulacion extends javax.swing.JFrame {
 
         OptStats.setBackground(new java.awt.Color(230, 230, 230));
         OptStats.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OptStats.setForeground(new java.awt.Color(230, 230, 230));
-        OptStats.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Procesos", "Operaciones", "Tiempo", "RAM KB", "RAM %", "V-RAM KB", "V-RAM %", "Págs en uso", "Págs libres", "Thrashing s", "Thrashing %", "Fragmentación"
-            }
-        ));
+        OptStats.setForeground(new java.awt.Color(0, 0, 0));
+        OptStats.setModel(OptStatsModel);
         OptStats.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OptStats.setAutoscrolls(false);
         OptStats.setSelectionBackground(new java.awt.Color(187, 187, 187));
@@ -210,15 +190,8 @@ public class Simulacion extends javax.swing.JFrame {
 
         OtherStats.setBackground(new java.awt.Color(230, 230, 230));
         OtherStats.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        OtherStats.setForeground(new java.awt.Color(230, 230, 230));
-        OtherStats.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Procesos", "Operaciones", "Tiempo", "RAM KB", "RAM %", "V-RAM KB", "V-RAM %", "Págs en uso", "Págs libres", "Thrashing s", "Thrashing %", "Fragmentación"
-            }
-        ));
+        OtherStats.setForeground(new java.awt.Color(0, 0, 0));
+        OtherStats.setModel(OtherStatsModel);
         OtherStats.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         OtherStats.setAutoscrolls(false);
         OtherStats.setSelectionBackground(new java.awt.Color(187, 187, 187));
@@ -312,7 +285,7 @@ public class Simulacion extends javax.swing.JFrame {
     //cambia el color de una celda OwO
     //ram.setDefaultRenderer(Object.class, new CustomCellRenderer(row, column));
     static class CustomCellRenderer extends DefaultTableCellRenderer {
-        
+
         private int row, column;
         private Color rgb;
 
@@ -333,23 +306,28 @@ public class Simulacion extends javax.swing.JFrame {
         public void setRGB(Color rgb) {
             this.rgb = rgb;
         }
-        
+
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
             Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            
+
+            //System.out.println("Row = " + row + " | " + this.row + " Column = " + column + " | " + this.column);
             // Cambiar el color de fondo de la celda en la fila y columna objetivo
             if (this.row == row && this.column == column) {
+                System.out.println("Cambió color");
                 cellComponent.setBackground(this.rgb); ///Modificar esta linea para que sea el color del proceso con variables globales
-            } else {
+            }/* else {
                 // Restaurar el color de fondo predeterminado para otras celdas
                 cellComponent.setBackground(table.getBackground());
             }
+            */
+            
+            //cellComponent.setBackground(this.rgb);
 
             return cellComponent;
         }
     }
-    
+
     /**
      * @param args the command line arguments
      * @param algoritmo
@@ -389,45 +367,78 @@ public class Simulacion extends javax.swing.JFrame {
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
                 instance.changeLabel(algoritmo);
-                
-                CustomCellRenderer OptRenderer = new CustomCellRenderer(0, 0, new Color(0,0,0));
-                CustomCellRenderer OtherRenderer = new CustomCellRenderer(0, 0, new Color(0,0,0));
 
-                /*
-                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                CustomCellRenderer OptRenderer = new CustomCellRenderer(0, 0, new Color(0, 0, 0));
+                CustomCellRenderer OtherRenderer = new CustomCellRenderer(0, 0, new Color(0, 0, 0));
 
-                INSERTAR ALGORITMO Y LÓGICA DEL MAIN en el timer, todavía no lo defino
+                instance.OptMMUModel.addColumn("PAGE ID");
+                instance.OptMMUModel.addColumn("ID");
+                instance.OptMMUModel.addColumn("Loaded");
+                instance.OptMMUModel.addColumn("L-ADDR");
+                instance.OptMMUModel.addColumn("M-ADDR");
+                instance.OptMMUModel.addColumn("D-ADDR");
+                instance.OptMMUModel.addColumn("TIME");
+                instance.OptMMUModel.addColumn("MARK");
 
-                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-                 */
-                
+                instance.OptStatsModel.addColumn("Procesos");
+                instance.OptStatsModel.addColumn("Operaciones");
+                instance.OptStatsModel.addColumn("Tiempo");
+                instance.OptStatsModel.addColumn("RAM KB");
+                instance.OptStatsModel.addColumn("RAM %");
+                instance.OptStatsModel.addColumn("V-RAM KB");
+                instance.OptStatsModel.addColumn("V-RAM %");
+                instance.OptStatsModel.addColumn("Págs en uso");
+                instance.OptStatsModel.addColumn("Págs libres");
+                instance.OptStatsModel.addColumn("Thrashing s");
+                instance.OptStatsModel.addColumn("Thrashing %");
+                instance.OptStatsModel.addColumn("Fragmentación");
+
+                instance.OtherMMUModel.addColumn("PAGE ID");
+                instance.OtherMMUModel.addColumn("ID");
+                instance.OtherMMUModel.addColumn("Loaded");
+                instance.OtherMMUModel.addColumn("L-ADDR");
+                instance.OtherMMUModel.addColumn("M-ADDR");
+                instance.OtherMMUModel.addColumn("D-ADDR");
+                instance.OtherMMUModel.addColumn("TIME");
+                instance.OtherMMUModel.addColumn("MARK");
+
+                instance.OtherStatsModel.addColumn("Procesos");
+                instance.OtherStatsModel.addColumn("Operaciones");
+                instance.OtherStatsModel.addColumn("Tiempo");
+                instance.OtherStatsModel.addColumn("RAM KB");
+                instance.OtherStatsModel.addColumn("RAM %");
+                instance.OtherStatsModel.addColumn("V-RAM KB");
+                instance.OtherStatsModel.addColumn("V-RAM %");
+                instance.OtherStatsModel.addColumn("Págs en uso");
+                instance.OtherStatsModel.addColumn("Págs libres");
+                instance.OtherStatsModel.addColumn("Thrashing s");
+                instance.OtherStatsModel.addColumn("Thrashing %");
+                instance.OtherStatsModel.addColumn("Fragmentación");
+
                 // Configuración del temporizador para actualizar la interfaz a un ritmo de 70bpm
                 timer = new Timer(857, new ActionListener() {
                     int page = 0;
-                    Color pageColor = new Color(123, 43, 212);
+                    Color pageColor = new Color(0,0,0);
                     int i = 0;
-                    
+                    int contadorFila = 0;
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         // Actualizar la interfaz gráfica dentro del hilo de eventos de Swing
                         EventQueue.invokeLater(() -> {
-                            if ( i >= programa.size()){
+                            if (i >= programa.size()) {
                                 System.out.println("Simulación terminada");
                                 timer.stop();
                             }
-                            
+
                             int instruction = programa.get(i)[0];
                             int param = programa.get(i)[1];
                             int size = 0;
-                            if (instruction == 1){
+                            if (instruction == 1) {
                                 size = programa.get(i)[2];
                             }
-                            
-                            switch (instruction){
+
+                            switch (instruction) {
                                 case 1 -> {
                                     OptMMU.New(param, size);
                                     OtherMMU.New(param, size);
@@ -446,15 +457,20 @@ public class Simulacion extends javax.swing.JFrame {
                                 }
                             }
                             
-                            
+                            /*
+*******************************************************************************************************************************************************                            
+*******************************************************************************************************************************************************
+*******************************************************************************************************************************************************
+                             */
+
                             Pagina[] OptRam = OptMMU.getRam();
                             ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
-                            for (int p = 0; p < OptRam.length; p++){
-                                if (OptRam[i] != null){
-                                    page = OptRam[i].getID();
-                                    int procesoID = OptRam[i].getPID();
-                                    for (Proceso proceso : OptProcessList){
-                                        if(proceso.getPid() == procesoID){
+                            for (int p = 0; p < OptRam.length; p++) {
+                                if (OptRam[p] != null) {
+                                    page = p;
+                                    int procesoID = OptRam[p].getPID();
+                                    for (Proceso proceso : OptProcessList) {
+                                        if (proceso.getPid() == procesoID) {
                                             pageColor = proceso.getColor();
                                             break;
                                         }
@@ -463,17 +479,231 @@ public class Simulacion extends javax.swing.JFrame {
                                     OptRenderer.setColumn(page % 20);
                                     OptRenderer.setRGB(pageColor);
                                     instance.OptRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OptRenderer);
+                                    instance.OptRamTable.setValueAt(procesoID, page/20, page%20);
                                     ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
                                 }
                             }
-                            
-                            
-                            OtherRenderer.setRow(page/20);
-                            OtherRenderer.setColumn(page%20);
+                            ArrayList<Pagina> OptDisk = OptMMU.getDisco();
+                            for (int j = 0; j < instance.OptMMUModel.getRowCount(); j++) {
+                                instance.OptMMUModel.removeRow(j);
+                            }
+                            for (int p = 0; p < OptRam.length; p++, contadorFila++) {
+                                if (OptRam[p] != null) {
+                                    Object[] rowData = {
+                                        OptRam[p].getID(),
+                                        OptRam[p].getPID(),
+                                        "X",
+                                        OptRam[p].getID(),
+                                        p,
+                                        null,
+                                        (OptMMU.getRelojS() - OptRam[p].getStime()) + "s",
+                                        null
+                                    };
+                                    instance.OptMMUModel.addRow(rowData);
+
+                                    OptRenderer.setRow(contadorFila);
+                                    System.out.println(contadorFila);
+                                    int procesoID = OptRam[p].getPID();
+                                    for (Proceso proceso : OptProcessList) {
+                                        if (proceso.getPid() == procesoID) {
+                                            pageColor = proceso.getColor();
+                                            break;
+                                        }
+                                    }
+                                    OptRenderer.setRGB(pageColor);
+                                    for (int j = 0; j < 8; j++) {
+                                        OptRenderer.setColumn(j);
+                                        instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
+                                        ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                    }
+                                } else {
+                                    contadorFila--;
+                                }
+                            }
+                            for (Pagina p : OptDisk) {
+                                Object[] rowData = {
+                                    p.getID(),
+                                    p.getPID(),
+                                    null,
+                                    p.getID(),
+                                    null,
+                                    p.getD_ADDR(),
+                                    null,
+                                    null
+                                };
+                                instance.OptMMUModel.addRow(rowData);
+
+                                OptRenderer.setRow(contadorFila);
+                                int procesoID = p.getPID();
+                                for (Proceso proceso : OptProcessList) {
+                                    if (proceso.getPid() == procesoID) {
+                                        pageColor = proceso.getColor();
+                                        break;
+                                    }
+                                }
+                                OptRenderer.setRGB(pageColor);
+                                for (int j = 0; j < 8; j++) {
+                                    OptRenderer.setColumn(j);
+                                    instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
+                                    ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                }
+                                contadorFila++;
+                            }
+                            if (instance.OptStatsModel.getRowCount() > 0) {
+                                instance.OptStatsModel.removeRow(0);
+                            }
+                            Object[] rowData = {
+                                OptMMU.getProcesos().size(),
+                                i,
+                                OptMMU.getRelojS(),
+                                OptMMU.getMemoriaRamUsada(),
+                                OptMMU.getMemoriaRamUsadaP(),
+                                OptMMU.getMemoriaVirtualUsada(),
+                                OptMMU.getMemoriaVirtualUsadaP(),
+                                OptMMU.getnPaginaRam(),
+                                100 - OptMMU.getnPaginaRam(),
+                                OptMMU.getTiempoFallos(),
+                                OptMMU.getTiempoFallosP() + "%",
+                                OptMMU.getMemoriaDesperdiciada()
+                            };
+                            instance.OptStatsModel.addRow(rowData);
+
+                            ((AbstractTableModel) instance.OptStats.getModel()).fireTableDataChanged();
+                            //instance.OptStatsModel.removeRow(0);
+
+                            /*
+*******************************************************************************************************************************************************                            
+*******************************************************************************************************************************************************
+*******************************************************************************************************************************************************
+                             */
+                            contadorFila = 0;
+                            /*
+#######################################################################################################################################################
+#######################################################################################################################################################
+#######################################################################################################################################################
+                             */
+
+                            Pagina[] OtherRam = OtherMMU.getRam();
+                            ArrayList<Proceso> OtherProcessList = OtherMMU.getProcesos();
+                            for (int p = 0; p < OtherRam.length; p++) {
+                                if (OtherRam[p] != null) {
+                                    page = p;
+                                    int procesoID = OtherRam[p].getPID();
+                                    for (Proceso proceso : OtherProcessList) {
+                                        if (proceso.getPid() == procesoID) {
+                                            pageColor = proceso.getColor();
+                                            break;
+                                        }
+                                    }
+                                    OtherRenderer.setRow(page / 20);
+                                    OtherRenderer.setColumn(page % 20);
+                                    OtherRenderer.setRGB(pageColor);
+                                    instance.OtherRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OtherRenderer);
+                                    instance.OtherRamTable.setValueAt(procesoID, page/20, page%20);
+                                    ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
+                                }
+                            }
+                            ArrayList<Pagina> OtherDisk = OtherMMU.getDisco();
+                            for (int p = 0; p < OtherRam.length; p++, contadorFila++) {
+                                if (OtherRam[p] != null) {
+                                    Object[] rowData1 = {
+                                        OptRam[p].getID(),
+                                        OptRam[p].getPID(),
+                                        "X",
+                                        OptRam[p].getID(),
+                                        p,
+                                        null,
+                                        (OptMMU.getRelojS() - OptRam[p].getStime()) + "s",
+                                        null
+                                    };
+                                    if (algoritmo == 2 || algoritmo == 3) {
+                                        rowData1[7] = OtherRam[p].getTime();
+                                    }
+                                    instance.OtherMMUModel.addRow(rowData1);
+                                    
+                                    OtherRenderer.setRow(contadorFila);
+                                    int procesoID = OtherRam[p].getPID();
+                                    for (Proceso proceso : OtherProcessList) {
+                                        if (proceso.getPid() == procesoID) {
+                                            pageColor = proceso.getColor();
+                                            break;
+                                        }
+                                    }
+                                    OtherRenderer.setRGB(pageColor);
+                                    for (int j = 0; j < 8; j++) {
+                                        OptRenderer.setColumn(j);
+                                        instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
+                                        ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                    }
+                                } else {
+                                    contadorFila--;
+                                }
+                            }
+                            for (Pagina p : OtherDisk) {
+                                    Object[] rowData1 = {
+                                        p.getID(),
+                                        p.getPID(),
+                                        null,
+                                        p.getID(),
+                                        null,
+                                        p.getD_ADDR(),
+                                        null,
+                                        null
+                                    };
+                                    if (algoritmo == 2 || algoritmo == 3) {
+                                        rowData1[7] = p.getTime();
+                                    }
+                                    instance.OtherMMUModel.addRow(rowData1);
+                                OtherRenderer.setRow(contadorFila);
+                                int procesoID = p.getPID();
+                                for (Proceso proceso : OtherProcessList) {
+                                    if (proceso.getPid() == procesoID) {
+                                        pageColor = proceso.getColor();
+                                        break;
+                                    }
+                                }
+                                OtherRenderer.setRGB(pageColor);
+                                for (int j = 0; j < 8; j++) {
+                                    OptRenderer.setColumn(j);
+                                    instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
+                                    ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                }
+
+                                contadorFila++;
+                            }
+                            if (instance.OtherStatsModel.getRowCount() > 0) {
+                                instance.OtherStatsModel.removeRow(0);
+                            }
+                            Object[] rowData1 = {
+                                OtherMMU.getProcesos().size(),
+                                i,
+                                OtherMMU.getRelojS(),
+                                OtherMMU.getMemoriaRamUsada(),
+                                OtherMMU.getMemoriaRamUsadaP(),
+                                OtherMMU.getMemoriaVirtualUsada(),
+                                OtherMMU.getMemoriaVirtualUsadaP(),
+                                OtherMMU.getnPaginaRam(),
+                                100 - OtherMMU.getnPaginaRam(),
+                                OtherMMU.getTiempoFallos(),
+                                OtherMMU.getTiempoFallosP() + "%",
+                                OtherMMU.getMemoriaDesperdiciada()
+                            };
+                            instance.OtherStatsModel.addRow(rowData1);
+
+                            ((AbstractTableModel) instance.OtherStats.getModel()).fireTableDataChanged();
+
+                            /*
+#######################################################################################################################################################
+#######################################################################################################################################################
+#######################################################################################################################################################
+                             */
+ /*
+                            OtherRenderer.setRow(page / 20);
+                            OtherRenderer.setColumn(page % 20);
                             OtherRenderer.setRGB(pageColor);
-                            instance.OtherRamTable.getColumnModel().getColumn(page%20).setCellRenderer(OtherRenderer);
-                            ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page/20, page%20);
-                            
+                            instance.OtherRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OtherRenderer);
+                            ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
+
                             /*
                             //// Cambio momentaneo a paginas en Ram, arreglar luego
                             for (int j = 0; j < instance.OptMMU.getRam().length; j++){
@@ -482,33 +712,27 @@ public class Simulacion extends javax.swing.JFrame {
                             for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
 
                             }
-                            */
-                            
-                            ArrayList<Proceso> OptProcess = OptMMU.getProcesos();
-                            for (Proceso p : OptProcess){
-                                
-                            }
-                            
+                             */
                             i++;
                             page++; //quiten esto
                         });
                     }
                 });
-                
+
                 timer.start();
             }
         });
-        
+
         /*
         for (Integer[] number : programa){
             System.out.println(Arrays.toString(number));
         }
-        */
+         */
     }
 
-    private void changeLabel(int algoritmo){
+    private void changeLabel(int algoritmo) {
         String text = "Otro";
-        switch(algoritmo){
+        switch (algoritmo) {
             case 1 -> {
                 text = "FIFO";
             }
@@ -522,11 +746,34 @@ public class Simulacion extends javax.swing.JFrame {
                 text = "Random";
             }
         }
-        labelOtherMMU.setText("MMU - "+text);
-        labelOtherRam.setText("RAM - "+text);
-        labelOtherStats.setText("Estadísticas - "+text);
+        labelOtherMMU.setText("MMU - " + text);
+        labelOtherRam.setText("RAM - " + text);
+        labelOtherStats.setText("Estadísticas - " + text);
     }
-    
+
+    /*    private void updateUI(MMU mmu, JTable MMUTable, JTable RamTable, JTable Stats, CustomCellRenderer renderer, Simulacion instance, int i) {
+        Color pageColor = new Color(0, 0, 0);
+        Pagina[] OptRam = OptMMU.getRam();
+        ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
+        for (int p = 0; p < OptRam.length; p++) {
+            if (OptRam[i] != null) {
+                int page = i;
+                int procesoID = OptRam[i].getPID();
+                for (Proceso proceso : OptProcessList) {
+                    if (proceso.getPid() == procesoID) {
+                        pageColor = proceso.getColor();
+                        break;
+                    }
+                }
+                renderer.setRow(page / 20);
+                renderer.setColumn(page % 20);
+                renderer.setRGB(pageColor);
+                instance.OptRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(renderer);
+                ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
+            }
+        }
+    }*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable OptMMUTable;
     private javax.swing.JTable OptRamTable;
@@ -549,6 +796,8 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel labelOtherStats;
     // End of variables declaration//GEN-END:variables
 
-    private MMU OptMMU, OtherMMU;
-    
+    DefaultTableModel OptMMUModel = new DefaultTableModel();
+    DefaultTableModel OptStatsModel = new DefaultTableModel();
+    DefaultTableModel OtherMMUModel = new DefaultTableModel();
+    DefaultTableModel OtherStatsModel = new DefaultTableModel();
 }

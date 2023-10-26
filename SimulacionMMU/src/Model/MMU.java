@@ -87,20 +87,18 @@ public class MMU {
         if (seed == 0) {
             rand = new Random();
         }
-        Proceso process = new Proceso(pid, (float) sizeKB, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-        if (!procesos.contains(process)) {
-            procesos.add(process);
-            System.out.println("Procesos" + procesos.size());
-        }// SI NO SIRVE ES POR ESTO
-        /*
-        for (Proceso p : procesos){
-            if (p.getPid() == pid){
-                //no lo agreguere
+        boolean agreguelo = true;
+        for (Proceso p : procesos) {
+            if (p.getPid() == pid) {
+                agreguelo = false;
+                break;
             }
         }
-        procesos.contains(pid);
-        procesos.add(process);
-         */
+        if (agreguelo) {
+            Proceso process = new Proceso(pid, (float) sizeKB, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+            procesos.add(process);
+        }
+
         if (espacios.size() < nPaginas) {
             //paginacion
 
@@ -113,7 +111,7 @@ public class MMU {
                         if (ram[i].getID() == ID) {
                             disco.add(ram[i]);
                             Date date = new Date();
-                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
                             ram[i] = page;
                             pages++;
                             cola.add(page);
@@ -144,7 +142,7 @@ public class MMU {
                         if (ram[i].getID() == ID) {
                             disco.add(ram[i]);
                             Date date = new Date();
-                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date,this.relojS, rand.nextInt());
                             ram[i] = page;
                             pages++;
                             cola.add(page);
@@ -173,8 +171,7 @@ public class MMU {
                 int e = espacios.get(0);
 
                 Date date = new Date();
-                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date);
-                System.out.println("pagina" + page.getID());
+                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
                 ram[e] = page;
                 pages++;
                 cola.add(page);
