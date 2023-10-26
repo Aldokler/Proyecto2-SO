@@ -5,13 +5,14 @@
 package Logic;
 
 import Model.Pagina;
+import java.util.Queue;
 import java.util.Random;
 
 /**
  *
  * @author Aldokler
  */
-public class RandomAlgorithm implements Algoritmo{
+public class RandomAlgorithm extends Al{
 
     @Override
     public int cambiarPaginas(Pagina[] paginas) {
@@ -22,6 +23,11 @@ public class RandomAlgorithm implements Algoritmo{
         }
         int page = rand.nextInt(paginas.length);
         return page;
+    }
+
+    @Override
+    public int cambiarPaginas(Queue<Pagina> paginas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

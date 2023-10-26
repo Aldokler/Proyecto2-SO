@@ -4,10 +4,14 @@
  */
 package Model;
 
+import Logic.Al;
+import Logic.FIFO;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 /**
@@ -24,7 +28,7 @@ public class MMU {
     private ArrayList<Pagina> disco = new ArrayList<Pagina>();
 
     private ArrayList<Proceso> procesos = new ArrayList<Proceso>();
-    private int pages = 0;
+    private int pages = 1;
     private int ptrs = 0;
     private int relojS = 0;
     private int tiempoFallos = 0;
@@ -38,18 +42,22 @@ public class MMU {
     private double memoriaVirtualUsadaP = 0;
 
     private double memoriaDesperdiciada = 0;
-    
-    private int nPaginaRam = 0; 
+
+    private int nPaginaRam = 0;
     private int nPaginaDisco = 0;
     private int cantidadProcesos = 0;
 
-    public MMU() {
+    private Queue<Pagina> cola = new LinkedList<Pagina>();
+    private Al algoritmo;
+
+    public MMU(Al algoritmo) {
+        this.algoritmo = algoritmo;
     }
 
     private ArrayList<Integer> espacioRam(int n) {
         ArrayList<Integer> espacios = new ArrayList<Integer>();
 
-        for (int i = 0; i <= ram.length; i++) {
+        for (int i = 0; i <= ram.length - 1; i++) {
             if (ram[i] == null) {
                 espacios.add(i);
                 if (espacios.size() == n) {
@@ -59,21 +67,30 @@ public class MMU {
 
         }
 
-        return null;
+        return espacios;
     }
 
     public int New(int pid, float size) {
-        int nPaginas = (int) ((size + sizePage - 1) / sizePage);
-        ArrayList<Integer> espacios = espacioRam(nPaginas);
+        System.out.println("PID " + pid);
         double sizeKB = size / 1024;
+        System.out.println("size" + sizeKB);
+        int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
+
+        System.out.println("paginas");
+        System.out.println(nPaginas);
+        ArrayList<Integer> espacios = espacioRam(nPaginas);
+
+        System.out.println("espacios");
+        System.out.println(espacios.size());
         int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
-        if (seed == 0){
+        if (seed == 0) {
             rand = new Random();
         }
-        Proceso process = new Proceso(pid, size, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
-        if(!procesos.contains(process)){
+        Proceso process = new Proceso(pid, (float) sizeKB, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+        if (!procesos.contains(process)) {
             procesos.add(process);
+            System.out.println("Procesos" + procesos.size());
         }// SI NO SIRVE ES POR ESTO
         /*
         for (Proceso p : procesos){
@@ -83,17 +100,96 @@ public class MMU {
         }
         procesos.contains(pid);
         procesos.add(process);
-        */
-        if (espacios == null) {
+         */
+        if (espacios.size() < nPaginas) {
             //paginacion
+
+            if (algoritmo instanceof FIFO) {
+                System.out.println("FIFO");
+                while (nPaginas > 0) {
+                    System.out.println("PAGINAAAA  " + pages);
+                    int ID = algoritmo.cambiarPaginas(cola);
+                    for (int i = 0; i < ram.length - 1; i++) {
+                        if (ram[i].getID() == ID) {
+                            disco.add(ram[i]);
+                            Date date = new Date();
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            ram[i] = page;
+                            pages++;
+                            cola.add(page);
+                            sizeKB = sizeKB - sizePage;
+
+                        }
+                    }
+
+                    System.out.println("pagiiFIFO  " + ID);
+                    nPaginas--;
+
+                    System.out.println("Ram");
+                    for (Pagina p : ram) {
+                        if (p != null) {
+                            System.out.println(p.getID());
+                        }
+
+                    }
+
+                }
+                //agregamos
+            } else {
+                System.out.println("NO FIFO");
+                while (nPaginas > 0) {
+                    System.out.println("PAGINAAAA  " + pages);
+                    int ID = algoritmo.cambiarPaginas(ram);
+                    for (int i = 0; i < ram.length - 1; i++) {
+                        if (ram[i].getID() == ID) {
+                            disco.add(ram[i]);
+                            Date date = new Date();
+                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date);
+                            ram[i] = page;
+                            pages++;
+                            cola.add(page);
+                            sizeKB = sizeKB - sizePage;
+
+                        }
+                    }
+
+                    System.out.println("pagiiFIFO  " + ID);
+                    nPaginas--;
+
+                    System.out.println("Ram");
+                    for (Pagina p : ram) {
+                        if (p != null) {
+                            System.out.println(p.getID());
+                        }
+
+                    }
+
+                }
+            }
+
         } else {
-            while (size > 0) {
+            System.out.println("NO AL");
+            while (espacios.size() > 0) {
                 int e = espacios.get(0);
+
                 Date date = new Date();
                 Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date);
+                System.out.println("pagina" + page.getID());
                 ram[e] = page;
-                size = size - sizePage;
+                pages++;
+                cola.add(page);
+
+                sizeKB = sizeKB - sizePage;
+                System.out.println("size" + sizeKB);
                 espacios.remove(0);
+                System.out.println("Ram");
+                for (Pagina p : ram) {
+                    if (p != null) {
+                        System.out.println(p.getID());
+                    }
+
+                }
+
             }
         }
         ptrs++;
@@ -160,7 +256,7 @@ public class MMU {
 
     public void VirtualMemoryUsed() {
         nPaginaDisco = disco.size();
-        memoriaVirtualUsada =  nPaginaDisco* sizePage;
+        memoriaVirtualUsada = nPaginaDisco * sizePage;
         memoriaVirtualUsadaP = (memoriaVirtualUsada / RamMemory) * 100;
 
     }
@@ -266,7 +362,5 @@ public class MMU {
     public int getCantidadProcesos() {
         return cantidadProcesos;
     }
-    
-    
 
 }
