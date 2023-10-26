@@ -19,7 +19,7 @@ public class Main {
      */
     public static void main(String[] args) {
       //  Preparacion.main(args);
-        MMU m = new MMU(new RandomAlgorithm());
+        MMU m = new MMU(new FIFO());
         for (int i = 0; i < 100; i++) {
             m.New(1, 4096);
         }
