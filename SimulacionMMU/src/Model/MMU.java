@@ -273,35 +273,34 @@ public class MMU {
     }
 
     public void use(int ptr) {
-        System.out.println("Tiempo" + relojS);
+        System.out.println("RelojI " + relojS);
         for (Pagina pagina : ram) {
             if (pagina != null) {
                 if (pagina.getPtr() == ptr) {
                     relojS++;
-                    System.out.println("Tiempo" + relojS);
+                    System.out.println("Reloj1Exi  " + relojS);
                 }
             }
 
         }
         ArrayList<Pagina> paginasCambiar = new ArrayList<Pagina>();
 
-        System.out.println("paginadisco" + paginasCambiar.size());
 
         for (int i = 0; i < disco.size(); i++) {
             if (disco.get(i).getPtr() == ptr) {
                 relojS = relojS + tiempoAccesoS;
                 tiempoFallos = tiempoFallos + tiempoAccesoS;
+                System.out.println("Tfallas " + tiempoFallos);
                 paginasCambiar.add(disco.remove(i));
             }
         }
 
         int sizePaginasD = paginasCambiar.size();
-        System.out.println("paginadisco" + paginasCambiar.size());
-        System.out.println("paginadisco" + sizePaginasD);
+
 
         if (sizePaginasD > 0) {
             ArrayList<Integer> espacios = espacioRam(sizePaginasD);
-            System.out.println("espacios" + espacios.size());
+
             if (espacios.size() < sizePaginasD) {
                 ArrayList<Integer> indexs = new ArrayList<Integer>();
                 //paginacion
@@ -320,15 +319,12 @@ public class MMU {
 
                 }
 
-                System.out.println("IDs" + indexs.size());
-
-                System.out.println("tamañoIndexID" + indexs.size());
                 int indiceRam = 0;
 
-                System.out.println("for");
+
                 while (indexs.size() > 0 && indiceRam < ram.length - 1) {
                     indiceRam++;
-                    System.out.println("whilw");
+
                     if (ram[indiceRam] != null) {
                         Integer i = ram[indiceRam].getID();
                         if (indexs.contains(ram[indiceRam].getID())) {
@@ -337,7 +333,7 @@ public class MMU {
                             ram[indiceRam] = paginasCambiar.get(0);
                             cola.add(paginasCambiar.get(0));
                             paginasCambiar.remove(0);
-                            System.out.println("tamañoIndexID-" + indexs.size());
+                  
                             /*System.out.println("Ram");
                                 for (Pagina p : ram) {
                                     if (p != null) {
@@ -367,7 +363,7 @@ public class MMU {
             }
         }
 
-        System.out.println("Tiempo" + relojS);
+        System.out.println("RelojF  " + relojS);
         estadisticas();
     }
 

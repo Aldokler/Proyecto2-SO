@@ -20,24 +20,23 @@ public class Main {
      */
     public static void main(String[] args) {
         //Preparacion.main(args);
+    
         MMU m = new MMU(new RandomAlgorithm());
+            System.out.println("r " + m.getRelojS());
         for (int i = 0; i < 100; i++) {
          
             m.New(1, 4096);
               
 
         }
+        System.out.println("r " + m.getRelojS());
         System.out.println("fue");
-         m.New(1, 4096*2+1800);
-        System.out.println("rammmm");
-                for (Pagina p : m.getRam()) {
-                    if (p != null) {
-                        System.out.println(p.getID());
-                    } else {
-                        System.out.println("null");
-                    }
-
-                }
+       //  m.New(1, 4096*2+1800);
+       
+        m.use(1);
+        m.use(1);
+        m.use(1);
+                
         
 //        for (Pagina p : m.getRam()) {
 //            if (p != null) {
