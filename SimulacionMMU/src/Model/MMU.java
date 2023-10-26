@@ -107,8 +107,6 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
-
-        
         // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
         //System.out.println("size" + sizeKB);
@@ -195,7 +193,7 @@ public class MMU {
                 // System.out.println("pagiiFIFO  " + ID);
                 //agregamos
             } else if(algoritmo instanceof optimo){
-                System.out.println("El optimo");
+
                 int nPaginasCambiar = nPaginas - espacios.size();
                 ArrayList<Integer> IDs = new ArrayList<>();
 
@@ -308,7 +306,6 @@ public class MMU {
             }
 
         } else {
-            System.out.println("NO AL");
             while (espacios.size() > 0) {
                 int e = espacios.get(0);
 
