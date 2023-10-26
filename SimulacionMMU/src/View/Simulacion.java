@@ -4,6 +4,7 @@
  */
 package View;
 
+import Logic.FIFO;
 import Model.MMU;
 import Model.Pagina;
 import Model.Proceso;
@@ -360,9 +361,9 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MMU OptMMU = new MMU();
-                MMU OtherMMU = new MMU();
-
+                MMU OptMMU = new MMU(new FIFO());/////////////////////////Cambio
+                MMU OtherMMU = new MMU(new FIFO());
+        
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
                 instance.changeLabel(algoritmo);

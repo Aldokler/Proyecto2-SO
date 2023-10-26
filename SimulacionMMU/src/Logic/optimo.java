@@ -6,14 +6,20 @@ package Logic;
 
 import Model.Pagina;
 import java.util.ArrayList;
+import java.util.Queue;
 
 /**
  *
  * @author jeffr
  */
-public class optimo implements Algoritmo{
+public class optimo extends Al{
     @Override
     public int cambiarPaginas(Pagina[] paginas){
       return 0;
+    }
+
+    @Override
+    public int cambiarPaginas(Queue<Pagina> paginas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

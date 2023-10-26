@@ -6,13 +6,14 @@ package Logic;
 
 import Model.Pagina;
 import java.util.Date;
+import java.util.Queue;
 
 
 /**
  *
  * @author jeffr
  */
-public class MRUAlgoritmo implements Algoritmo{
+public class MRUAlgoritmo extends Al{
 
     @Override
      public int cambiarPaginas(Pagina[] paginas){
@@ -35,6 +36,11 @@ public class MRUAlgoritmo implements Algoritmo{
            }
         } 
         return retorno;
+    }
+
+    @Override
+    public int cambiarPaginas(Queue<Pagina> paginas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
