@@ -21,24 +21,19 @@ public class Main {
     public static void main(String[] args) {
         //Preparacion.main(args);
 
-        MMU m = new MMU(new RandomAlgorithm());
+        MMU m = new MMU(new FIFO());
         System.out.println("r " + m.getRelojS());
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 99; i++) {
 
             m.New(1, 4096);
 
         }
+        m.New(1, 4096*2);
 
-        m.New(1, 4096 * 2 + 1800);
+       // m.delete(100);
+
         System.out.println("r ui");
 
-        System.out.println("r " + m.getRelojS());
-        System.out.println("tF  " + m.getTiempoFallos());
-
-        m.use(1);
-        m.delete(100);
-        m.New(6, 4096);
-        m.New(6, 4096);
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());
@@ -46,16 +41,7 @@ public class Main {
                 System.out.println("null");
             }
         }
-        m.kill(6);
-         System.out.println("nurfffsdffdsfdsll");
-          m.New(66, 4096*3);
-        for (Pagina p : m.getRam()) {
-            if (p != null) {
-                System.out.println(p.getID());
-            } else {
-                System.out.println("null");
-            }
-        }
+       
         
        
 
