@@ -73,12 +73,13 @@ public class MMU {
 
     public int New(int pid, float size) {
 
-        tiempoFallos = tiempoFallos + tiempoAccesoS;
+        
         // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
         //System.out.println("size" + sizeKB);
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
         relojS = relojS + (tiempoAccesoS * nPaginas);
+        tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
         //System.out.println("paginas");
         //System.out.println(nPaginas);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
@@ -210,7 +211,7 @@ public class MMU {
 
                 }
                 System.out.println("I " + II);
-                //use(II);
+                use(II);
 
             }
 
