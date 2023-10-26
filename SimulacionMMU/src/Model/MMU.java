@@ -6,6 +6,8 @@ package Model;
 
 import Logic.Al;
 import Logic.FIFO;
+import Logic.MRUAlgoritmo;
+import Logic.RandomAlgorithm;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -55,6 +57,22 @@ public class MMU {
 
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
+    }
+
+    public MMU(int opt) {
+        switch(opt){
+            case 1 -> {
+                this.algoritmo = new FIFO();
+            }
+            case 2 -> {
+            }
+            case 3 -> {
+                this.algoritmo = new MRUAlgoritmo();
+            }
+            case 4 -> {
+                this.algoritmo = new RandomAlgorithm();
+            }
+        }
     }
     
     public MMU(ArrayList<Integer[]> instrucciones) {
