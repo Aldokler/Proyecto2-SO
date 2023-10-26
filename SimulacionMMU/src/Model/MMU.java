@@ -6,6 +6,8 @@ package Model;
 
 import Logic.Al;
 import Logic.FIFO;
+import Logic.MRUAlgoritmo;
+import Logic.RandomAlgorithm;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -50,10 +52,41 @@ public class MMU {
     private Queue<Pagina> cola = new LinkedList<Pagina>();
     private Al algoritmo;
     int II;
+    private ArrayList<Integer[]> instrucciones ;
+    private int instruccionCounter;
 
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
     }
+
+    public MMU(int opt) {
+        switch(opt){
+            case 1 -> {
+                this.algoritmo = new FIFO();
+            }
+            case 2 -> {
+            }
+            case 3 -> {
+                this.algoritmo = new MRUAlgoritmo();
+            }
+            case 4 -> {
+                this.algoritmo = new RandomAlgorithm();
+            }
+        }
+    }
+    
+    public MMU(ArrayList<Integer[]> instrucciones) {
+        this.instrucciones = instrucciones;
+    }
+
+    public int getInstruccionCounter() {
+        return instruccionCounter;
+    }
+
+    public void setInstruccionCounter(int instruccionCounter) {
+        this.instruccionCounter = instruccionCounter;
+    }
+    
 
     private ArrayList<Integer> espacioRam(int n) {
         ArrayList<Integer> espacios = new ArrayList<Integer>();

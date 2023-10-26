@@ -5,6 +5,9 @@
 package View;
 
 import Logic.FIFO;
+import Logic.MRUAlgoritmo;
+import Logic.RandomAlgorithm;
+import Logic.optimo;
 import Model.MMU;
 import Model.Pagina;
 import Model.Proceso;
@@ -217,12 +220,6 @@ public class Simulacion extends javax.swing.JFrame {
                 .addComponent(labelOtherMMU)
                 .addGap(210, 210, 210))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(166, 166, 166)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelOtherStats)
-                .addGap(186, 186, 186))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,6 +231,12 @@ public class Simulacion extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelOtherStats)
+                .addGap(189, 189, 189))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,20 +255,17 @@ public class Simulacion extends javax.swing.JFrame {
                     .addComponent(labelOtherMMU))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(labelOtherStats))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelOtherStats)
+                    .addComponent(jLabel5))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -320,8 +320,8 @@ public class Simulacion extends javax.swing.JFrame {
                 // Restaurar el color de fondo predeterminado para otras celdas
                 cellComponent.setBackground(table.getBackground());
             }
-            */
-            
+             */
+
             //cellComponent.setBackground(this.rgb);
 
             return cellComponent;
@@ -361,9 +361,9 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MMU OptMMU = new MMU(new FIFO());/////////////////////////Cambio
-                MMU OtherMMU = new MMU(new FIFO());
-        
+                MMU OptMMU = new MMU(new optimo());
+                MMU OtherMMU = new MMU(algoritmo);
+
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
                 instance.changeLabel(algoritmo);
@@ -418,7 +418,7 @@ public class Simulacion extends javax.swing.JFrame {
                 // Configuración del temporizador para actualizar la interfaz a un ritmo de 70bpm
                 timer = new Timer(857, new ActionListener() {
                     int page = 0;
-                    Color pageColor = new Color(0,0,0);
+                    Color pageColor = new Color(0, 0, 0);
                     int i = 0;
                     int contadorFila = 0;
 
@@ -456,13 +456,12 @@ public class Simulacion extends javax.swing.JFrame {
                                     OtherMMU.kill(param);
                                 }
                             }
-                            
+
                             /*
 *******************************************************************************************************************************************************                            
 *******************************************************************************************************************************************************
 *******************************************************************************************************************************************************
                              */
-
                             Pagina[] OptRam = OptMMU.getRam();
                             ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
                             for (int p = 0; p < OptRam.length; p++) {
@@ -479,7 +478,7 @@ public class Simulacion extends javax.swing.JFrame {
                                     OptRenderer.setColumn(page % 20);
                                     OptRenderer.setRGB(pageColor);
                                     instance.OptRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OptRenderer);
-                                    instance.OptRamTable.setValueAt(procesoID, page/20, page%20);
+                                    instance.OptRamTable.setValueAt(procesoID, page / 20, page % 20);
                                     ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
                                 }
                             }
@@ -599,7 +598,7 @@ public class Simulacion extends javax.swing.JFrame {
                                     OtherRenderer.setColumn(page % 20);
                                     OtherRenderer.setRGB(pageColor);
                                     instance.OtherRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OtherRenderer);
-                                    instance.OtherRamTable.setValueAt(procesoID, page/20, page%20);
+                                    instance.OtherRamTable.setValueAt(procesoID, page / 20, page % 20);
                                     ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
                                 }
                             }
@@ -620,7 +619,7 @@ public class Simulacion extends javax.swing.JFrame {
                                         rowData1[7] = OtherRam[p].getTime();
                                     }
                                     instance.OtherMMUModel.addRow(rowData1);
-                                    
+
                                     OtherRenderer.setRow(contadorFila);
                                     int procesoID = OtherRam[p].getPID();
                                     for (Proceso proceso : OtherProcessList) {
@@ -640,20 +639,20 @@ public class Simulacion extends javax.swing.JFrame {
                                 }
                             }
                             for (Pagina p : OtherDisk) {
-                                    Object[] rowData1 = {
-                                        p.getID(),
-                                        p.getPID(),
-                                        null,
-                                        p.getID(),
-                                        null,
-                                        p.getD_ADDR(),
-                                        null,
-                                        null
-                                    };
-                                    if (algoritmo == 2 || algoritmo == 3) {
-                                        rowData1[7] = p.getTime();
-                                    }
-                                    instance.OtherMMUModel.addRow(rowData1);
+                                Object[] rowData1 = {
+                                    p.getID(),
+                                    p.getPID(),
+                                    null,
+                                    p.getID(),
+                                    null,
+                                    p.getD_ADDR(),
+                                    null,
+                                    null
+                                };
+                                if (algoritmo == 2 || algoritmo == 3) {
+                                    rowData1[7] = p.getTime();
+                                }
+                                instance.OtherMMUModel.addRow(rowData1);
                                 OtherRenderer.setRow(contadorFila);
                                 int procesoID = p.getPID();
                                 for (Proceso proceso : OtherProcessList) {
@@ -696,25 +695,9 @@ public class Simulacion extends javax.swing.JFrame {
 #######################################################################################################################################################
 #######################################################################################################################################################
 #######################################################################################################################################################
-                             */
- /*
-                            OtherRenderer.setRow(page / 20);
-                            OtherRenderer.setColumn(page % 20);
-                            OtherRenderer.setRGB(pageColor);
-                            instance.OtherRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OtherRenderer);
-                            ((AbstractTableModel) instance.OtherRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
-
-                            /*
-                            //// Cambio momentaneo a paginas en Ram, arreglar luego
-                            for (int j = 0; j < instance.OptMMU.getRam().length; j++){
-
-                            }
-                            for (int j = 0; j < instance.OtherMMU.getRam().length; j++){
-
-                            }
-                             */
+                            */
                             i++;
-                            page++; //quiten esto
+                            System.out.println("Instrucción " + i + " procesada");
                         });
                     }
                 });

@@ -117,6 +117,8 @@ public class Main {
       
        m.New(6, 4096*3+1800);
         m.kill(6);*/
+        
+        Preparacion.main(args);
     }
 
 }

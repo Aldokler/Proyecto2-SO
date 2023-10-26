@@ -14,12 +14,19 @@ import java.util.Queue;
  */
 public class optimo extends Al{
     @Override
-    public int cambiarPaginas(Pagina[] paginas){
-      return 0;
+    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas, int instruccionCount) {
+        return 0;
     }
-
+   
     @Override
     public int cambiarPaginas(Queue<Pagina> paginas) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
+
+    @Override
+    public int cambiarPaginas(Pagina[] paginas) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

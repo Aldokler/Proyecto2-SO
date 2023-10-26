@@ -5,6 +5,7 @@
 package Logic;
 
 import Model.Pagina;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
 
@@ -27,7 +28,24 @@ public class RandomAlgorithm extends Al{
 
     @Override
     public int cambiarPaginas(Queue<Pagina> paginas) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int seed = seedSingleton.getInstance().getSeed();
+        Random rand = new Random(seed);
+        if (seed == 0){
+            rand = new Random();
+        }
+        int page = rand.nextInt(paginas.size());
+        return page;
+    }
+
+    @Override
+    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas, int instruccionCount) {
+        int seed = seedSingleton.getInstance().getSeed();
+        Random rand = new Random(seed);
+        if (seed == 0){
+            rand = new Random();
+        }
+        int page = rand.nextInt(paginas.length);
+        return page;
     }
     
 }
