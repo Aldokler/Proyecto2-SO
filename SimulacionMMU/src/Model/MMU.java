@@ -49,6 +49,7 @@ public class MMU {
 
     private Queue<Pagina> cola = new LinkedList<Pagina>();
     private Al algoritmo;
+    int II;
 
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
@@ -71,13 +72,13 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
-        relojS = relojS + tiempoAccesoS;
+
         tiempoFallos = tiempoFallos + tiempoAccesoS;
         // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
         //System.out.println("size" + sizeKB);
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
-
+        relojS = relojS + (tiempoAccesoS * nPaginas);
         //System.out.println("paginas");
         //System.out.println(nPaginas);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
@@ -169,6 +170,8 @@ public class MMU {
 
                 int indiceRam = 0;
 
+                II = IDs.get(0);
+
                 System.out.println("paginasIDAlg");
                 for (Integer p : IDs) {
 
@@ -206,6 +209,9 @@ public class MMU {
                     }
 
                 }
+                System.out.println("I " + II);
+                use(II);
+
             }
 
         } else {
@@ -234,6 +240,7 @@ public class MMU {
         }
         ptrs++;
         estadisticas();
+
         return ptrs - 1;
     }
 
@@ -285,7 +292,6 @@ public class MMU {
         }
         ArrayList<Pagina> paginasCambiar = new ArrayList<Pagina>();
 
-
         for (int i = 0; i < disco.size(); i++) {
             if (disco.get(i).getPtr() == ptr) {
                 relojS = relojS + tiempoAccesoS;
@@ -296,7 +302,6 @@ public class MMU {
         }
 
         int sizePaginasD = paginasCambiar.size();
-
 
         if (sizePaginasD > 0) {
             ArrayList<Integer> espacios = espacioRam(sizePaginasD);
@@ -321,7 +326,6 @@ public class MMU {
 
                 int indiceRam = 0;
 
-
                 while (indexs.size() > 0 && indiceRam < ram.length - 1) {
                     indiceRam++;
 
@@ -333,7 +337,7 @@ public class MMU {
                             ram[indiceRam] = paginasCambiar.get(0);
                             cola.add(paginasCambiar.get(0));
                             paginasCambiar.remove(0);
-                  
+
                             /*System.out.println("Ram");
                                 for (Pagina p : ram) {
                                     if (p != null) {

@@ -29,13 +29,19 @@ public class Main {
               
 
         }
-        System.out.println("r " + m.getRelojS());
-        System.out.println("fue");
-       //  m.New(1, 4096*2+1800);
+        
+       m.New(1, 4096*2+1800);
+       System.out.println("r ui");
+
+       System.out.println("r " + m.getRelojS());
+        System.out.println("tF  " + m.getTiempoFallos());
        
-        m.use(1);
-        m.use(1);
-        m.use(1);
+
+       
+      m.use(1);
+      //  m.use(1);
+       
+  
                 
         
 //        for (Pagina p : m.getRam()) {
