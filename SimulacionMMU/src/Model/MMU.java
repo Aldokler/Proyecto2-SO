@@ -159,12 +159,12 @@ public class MMU {
                 System.out.println("IDS" +  IDs.size()  + "  "  + IDs.get(0));
 
                 int indiceRam = 0;
-                while (IDs.size() > 0) {
+                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
 
                     if (ram[indiceRam] != null) {
-
-                        if (ram[indiceRam].getID() == IDs.get(0)) {
-                            IDs.remove(0);
+                        Integer i = ram[indiceRam].getID();
+                        if (IDs.contains(ram[indiceRam].getID())) {
+                            IDs.remove(i);
 
                             disco.add(ram[indiceRam]);
                             ram[indiceRam] = null;
@@ -173,6 +173,7 @@ public class MMU {
                     }
 
                     indiceRam++;
+
                 }
 
                 for (int i = 0; i < ram.length - 1; i++) {
