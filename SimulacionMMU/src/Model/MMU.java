@@ -51,6 +51,7 @@ public class MMU {
     private Al algoritmo;
     int II;
     private ArrayList<Integer[]> instrucciones ;
+    private int instruccionCounter;
 
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
@@ -59,6 +60,15 @@ public class MMU {
     public MMU(ArrayList<Integer[]> instrucciones) {
         this.instrucciones = instrucciones;
     }
+
+    public int getInstruccionCounter() {
+        return instruccionCounter;
+    }
+
+    public void setInstruccionCounter(int instruccionCounter) {
+        this.instruccionCounter = instruccionCounter;
+    }
+    
 
     private ArrayList<Integer> espacioRam(int n) {
         ArrayList<Integer> espacios = new ArrayList<Integer>();
