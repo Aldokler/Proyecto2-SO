@@ -62,7 +62,7 @@ public class Main {
 
         m.delete(1);
 
-        m.New(5, 4096+4096);
+       m.New(5, 4096+4096);
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());

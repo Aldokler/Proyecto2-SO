@@ -110,21 +110,22 @@ public class MMU {
                     //  System.out.println("PAGINAAAA  " + pages);
                     int ID = algoritmo.cambiarPaginas(cola);
                     for (int i = 0; i < ram.length - 1; i++) {
-                        if (ram[i].getID() == ID) {
-                            disco.add(ram[i]);
-                            Date date = new Date();
-                            Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
-                            ram[i] = page;
-                            pages++;
-                            cola.add(page);
-                            sizeKB = sizeKB - sizePage;
+                        if (ram[i] != null) {
+                            if (ram[i].getID() == ID) {
+                                disco.add(ram[i]);
+                                Date date = new Date();
+                                Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+                                ram[i] = page;
+                                pages++;
+                                cola.add(page);
+                                sizeKB = sizeKB - sizePage;
 
+                            }
                         }
+
                     }
 
                     // System.out.println("pagiiFIFO  " + ID);
-                    nPaginas--;
-
                     /* System.out.println("Ram");
                     for (Pagina p : ram) {
                         if (p != null) {
@@ -132,6 +133,7 @@ public class MMU {
                         }
 
                     }*/
+                    nPaginas--;
                 }
                 //agregamos
             } else {
@@ -349,17 +351,16 @@ public class MMU {
     }
 
     public void estadisticas() {
-        
+
         cantidadProcesos = procesos.size();
         ramUsed();
         VirtualMemoryUsed();
         calcularMemoriaFrag();
         tiempoFallosP = (tiempoFallos / relojS) * 100;
-    
- 
+
         System.out.println("tfallos" + tiempoFallos);
-         System.out.println("re" + relojS);
-        
+        System.out.println("re" + relojS);
+
         System.out.println("tiempoFallosP  " + (tiempoFallos / relojS) * 100);
     }
 
