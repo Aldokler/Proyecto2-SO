@@ -38,6 +38,7 @@ public class MMU {
     
     private int nPaginaRam = 0; 
     private int nPaginaDisco = 0;
+    private int cantidadProcesos = 0;
 
     public MMU() {
     }
@@ -143,8 +144,9 @@ public class MMU {
 
     }
 
-    public void s() {
+    public void estadistica() {
         tiempoFallosP = (tiempoFallos / relojS) * 100;
+        cantidadProcesos = procesos.size();
     }
 
     public void calcularMemoriaFrag() {
