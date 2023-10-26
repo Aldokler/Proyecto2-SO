@@ -5,6 +5,8 @@
 package View;
 
 import Model.MMU;
+import Model.Pagina;
+import Model.Proceso;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -444,11 +446,26 @@ public class Simulacion extends javax.swing.JFrame {
                             }
                             
                             
-                            OptRenderer.setRow(page/20);
-                            OptRenderer.setColumn(page%20);
-                            OptRenderer.setRGB(pageColor);
-                            instance.OptRamTable.getColumnModel().getColumn(page%20).setCellRenderer(OptRenderer);
-                            ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page/20, page%20);
+                            Pagina[] OptRam = OptMMU.getRam();
+                            ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
+                            for (int p = 0; p < OptRam.length; p++){
+                                if (OptRam[i] != null){
+                                    page = OptRam[i].getID();
+                                    int procesoID = OptRam[i].getPID();
+                                    for (Proceso proceso : OptProcessList){
+                                        if(proceso.getPid() == procesoID){
+                                            pageColor = proceso.getColor();
+                                            break;
+                                        }
+                                    }
+                                    OptRenderer.setRow(page / 20);
+                                    OptRenderer.setColumn(page % 20);
+                                    OptRenderer.setRGB(pageColor);
+                                    instance.OptRamTable.getColumnModel().getColumn(page % 20).setCellRenderer(OptRenderer);
+                                    ((AbstractTableModel) instance.OptRamTable.getModel()).fireTableCellUpdated(page / 20, page % 20);
+                                }
+                            }
+                            
                             
                             OtherRenderer.setRow(page/20);
                             OtherRenderer.setColumn(page%20);
@@ -465,6 +482,11 @@ public class Simulacion extends javax.swing.JFrame {
 
                             }
                             */
+                            
+                            ArrayList<Proceso> OptProcess = OptMMU.getProcesos();
+                            for (Proceso p : OptProcess){
+                                
+                            }
                             
                             i++;
                             page++; //quiten esto

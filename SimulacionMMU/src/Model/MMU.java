@@ -4,8 +4,11 @@
  */
 package Model;
 
+import Logic.seedSingleton;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 /**
  *
@@ -63,6 +66,24 @@ public class MMU {
         int nPaginas = (int) ((size + sizePage - 1) / sizePage);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
         double sizeKB = size / 1024;
+        int seed = seedSingleton.getInstance().getSeed();
+        Random rand = new Random(seed);
+        if (seed == 0){
+            rand = new Random();
+        }
+        Proceso process = new Proceso(pid, size, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+        if(!procesos.contains(process)){
+            procesos.add(process);
+        }// SI NO SIRVE ES POR ESTO
+        /*
+        for (Proceso p : procesos){
+            if (p.getPid() == pid){
+                //no lo agreguere
+            }
+        }
+        procesos.contains(pid);
+        procesos.add(process);
+        */
         if (espacios == null) {
             //paginacion
         } else {
