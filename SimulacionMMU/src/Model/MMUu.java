@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Model;
 
 import Logic.Al;
@@ -18,7 +14,7 @@ import java.util.Random;
  *
  * @author jeffr
  */
-public class MMU {
+public class MMUu {
 
     private int sizePage = 4;
     private double RamMemory = sizePage * 100;
@@ -51,7 +47,7 @@ public class MMU {
     private Al algoritmo;
     int II;
 
-    public MMU(Al algoritmo) {
+    public MMUu(Al algoritmo) {
         this.algoritmo = algoritmo;
     }
 
@@ -72,20 +68,12 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
-
-        
-        // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
-        //System.out.println("size" + sizeKB);
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
         relojS = relojS + (tiempoAccesoS * nPaginas);
         tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
-        //System.out.println("paginas");
-        //System.out.println(nPaginas);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
 
-        // System.out.println("espacios");
-        // System.out.println(espacios.size());
         int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
         if (seed == 0) {
@@ -103,144 +91,43 @@ public class MMU {
             procesos.add(process);
         }
 
-        if (espacios.size() < nPaginas) {
-            //paginacion
+        int nPaginacion = nPaginas - espacios.size();
+        int nAgregar = nPaginacion;
+        while (espacios.size() > 0) {
+            int e = espacios.get(0);
 
-            if (algoritmo instanceof FIFO) {
-                System.out.println("FIFO");
-                int nPaginasCambiar = nPaginas - espacios.size();
-                 System.out.println("paginas  " + nPaginas);
-                  System.out.println("espacios  "  + espacios.size());
-                  System.out.println("espacios n "  + nPaginasCambiar);
-                ArrayList<Integer> IDs = new ArrayList<>();
+            Date date = new Date();
+            Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+            ram[e] = page;
+            pages++;
+            cola.add(page);
 
-                while (nPaginasCambiar > 0) {
-                    //  System.out.println("PAGINAAAA  " + pages);
+            sizeKB = sizeKB - sizePage;
+            espacios.remove(0);
 
-                    int ID = algoritmo.cambiarPaginas(cola);
-                    IDs.add(ID);
-                    nPaginasCambiar--;
+        }
+        if (algoritmo instanceof FIFO) {
 
-                }
-                
-                System.out.println("IDS" +  IDs.size()  + "  "  + IDs.get(0));
-
-                int indiceRam = 0;
-                while (IDs.size() > 0) {
-
-                    if (ram[indiceRam] != null) {
-
-                        if (ram[indiceRam].getID() == IDs.get(0)) {
-                            IDs.remove(0);
-
-                            disco.add(ram[indiceRam]);
-                            ram[indiceRam] = null;
-
-                        }
-                    }
-
-                    indiceRam++;
-                }
-
-                for (int i = 0; i < ram.length - 1; i++) {
-
-                    if (ram[i] == null) {
-                        Date date = new Date();
-                        Pagina page = new Pagina(pid, pages, indiceRam, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
-                        ram[i] = page;
-                        pages++;
-                        cola.add(page);
-                        sizeKB = sizeKB - sizePage;
-
-                    }
-
-                }
-
-                //cearDate date = new Date();
-                // System.out.println("pagiiFIFO  " + ID);
-                //agregamos
-            } else {
-                System.out.println("No FIFO");
-
-                int nPaginasCambiar = nPaginas - espacios.size();
-                ArrayList<Integer> IDs = new ArrayList<>();
-
-                while (nPaginasCambiar > 0) {
-                    //  System.out.println("PAGINAAAA  " + pages);
-
-                    int ID = algoritmo.cambiarPaginas(ram);
-                    IDs.add(ID);
-                    nPaginasCambiar--;
-
-                }
-
-                int indiceRam = 0;
-
-
-                System.out.println("paginasIDAlg");
-                for (Integer p : IDs) {
-
-                    System.out.println(p);
-
-                }
-
-                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
-
-                    if (ram[indiceRam] != null) {
-                        Integer i = ram[indiceRam].getID();
-                        if (IDs.contains(ram[indiceRam].getID())) {
-                            IDs.remove(i);
-
-                            disco.add(ram[indiceRam]);
-                            ram[indiceRam] = null;
-
-                        }
-                    }
-
-                    indiceRam++;
-
-                }
-
-                for (int i = 0; i < ram.length - 1; i++) {
-
-                    if (ram[i] == null) {
-                        Date date = new Date();
-                        Pagina page = new Pagina(pid, pages, indiceRam, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
-                        ram[i] = page;
-                        pages++;
-                        cola.add(page);
-                        sizeKB = sizeKB - sizePage;
-
-                    }
-
-                }
+            ArrayList<Integer> IDs = new ArrayList<>();
+            while (nPaginacion > 0) {
+                int ID = algoritmo.cambiarPaginas(cola);
+                IDs.add(ID);
+                nPaginacion--;
 
             }
 
         } else {
-            System.out.println("NO AL");
-            while (espacios.size() > 0) {
-                int e = espacios.get(0);
-
-                Date date = new Date();
-                Pagina page = new Pagina(pid, pages, e, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
-                ram[e] = page;
-                pages++;
-                cola.add(page);
-
-                sizeKB = sizeKB - sizePage;
-                //System.out.println("size" + sizeKB);
-                espacios.remove(0);
-                //System.out.println("Ram");
-                /*for (Pagina p : ram) {
-                    if (p != null) {
-                        System.out.println(p.getID());
-                    }
-
-                }*/
+            ArrayList<Integer> IDs = new ArrayList<>();
+            while (nPaginacion > 0) {
+                int ID = algoritmo.cambiarPaginas(ram);
+                IDs.add(ID);
+                nPaginacion--;
 
             }
         }
+        
+        
+
         ptrs++;
         estadisticas();
 
