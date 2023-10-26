@@ -408,7 +408,15 @@ public class MMU {
                         indexs.add(ID);
                         sizePaginasD--;
                     }
-                } else {
+                } else if(algoritmo instanceof optimo) {
+                while (sizePaginasD > 0) {
+                        int ID = algoritmo.cambiarPaginas(instrucciones, ram, instruccionCounter);
+                        indexs.add(ID);
+                        sizePaginasD--;
+                }
+                }
+                
+                else {
                     while (sizePaginasD > 0) {
                         int ID = algoritmo.cambiarPaginas(ram);
                         indexs.add(ID);
