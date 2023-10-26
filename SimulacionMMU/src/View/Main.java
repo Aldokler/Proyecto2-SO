@@ -20,30 +20,45 @@ public class Main {
      */
     public static void main(String[] args) {
         //Preparacion.main(args);
-    
+
         MMU m = new MMU(new RandomAlgorithm());
-            System.out.println("r " + m.getRelojS());
+        System.out.println("r " + m.getRelojS());
         for (int i = 0; i < 100; i++) {
-         
+
             m.New(1, 4096);
-              
 
         }
-        
-       m.New(1, 4096*2+1800);
-       System.out.println("r ui");
 
-       System.out.println("r " + m.getRelojS());
+        m.New(1, 4096 * 2 + 1800);
+        System.out.println("r ui");
+
+        System.out.println("r " + m.getRelojS());
         System.out.println("tF  " + m.getTiempoFallos());
+
+        m.use(1);
+        m.delete(100);
+        m.New(6, 4096);
+        m.New(6, 4096);
+        for (Pagina p : m.getRam()) {
+            if (p != null) {
+                System.out.println(p.getID());
+            } else {
+                System.out.println("null");
+            }
+        }
+        m.kill(6);
+         System.out.println("nurfffsdffdsfdsll");
+          m.New(66, 4096*3);
+        for (Pagina p : m.getRam()) {
+            if (p != null) {
+                System.out.println(p.getID());
+            } else {
+                System.out.println("null");
+            }
+        }
+        
        
 
-       
-      m.use(1);
-      //  m.use(1);
-       
-  
-                
-        
 //        for (Pagina p : m.getRam()) {
 //            if (p != null) {
 //                System.out.println(p.getID());
@@ -52,9 +67,9 @@ public class Main {
 //            }
 //
 //        }
-   // m.New(1, 4096*3+1800);
-      //  m.use(1);
-       /* m.use(2);
+        // m.New(1, 4096*3+1800);
+        //  m.use(1);
+        /* m.use(2);
         m.use(1);
         m.use(1);
         m.use(1);
@@ -112,11 +127,10 @@ public class Main {
         }
         
       
-       m.delete(103);
+       m.delete(100);
       
        m.New(6, 4096*3+1800);
         m.kill(6);*/
-        
     }
 
 }

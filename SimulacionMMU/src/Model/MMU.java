@@ -210,8 +210,6 @@ public class MMU {
                     }
 
                 }
-                System.out.println("I " + II);
-                use(II);
 
             }
 
