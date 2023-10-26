@@ -21,7 +21,7 @@ import java.util.Random;
 public class MMU {
 
     private int sizePage = 4;
-    private int RamMemory = (sizePage * 100);
+    private double RamMemory = sizePage * 100;
     private int tiempoAccesoS = 5;
 
     private Pagina[] ram = new Pagina[100];
@@ -30,8 +30,8 @@ public class MMU {
     private ArrayList<Proceso> procesos = new ArrayList<Proceso>();
     private int pages = 1;
     private int ptrs = 1;
-    private int relojS = 0;
-    private int tiempoFallos = 0;
+    private double relojS = 0;
+    private double tiempoFallos = 0;
 
     private double tiempoFallosP = 0;
 
@@ -71,6 +71,8 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
+        relojS = relojS + tiempoAccesoS;
+        tiempoFallos = tiempoFallos + tiempoAccesoS;
         // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
         //System.out.println("size" + sizeKB);
@@ -188,6 +190,7 @@ public class MMU {
             }
         }
         ptrs++;
+        estadisticas();
         return ptrs - 1;
     }
 
@@ -203,6 +206,7 @@ public class MMU {
                 ram[i] = null;
             }
         }
+        estadisticas();
 
     }
 
@@ -218,6 +222,7 @@ public class MMU {
                 ram[i] = null;
             }
         }
+        estadisticas();
     }
 
     public void use(int ptr) {
@@ -238,6 +243,7 @@ public class MMU {
         for (int i = 0; i < disco.size(); i++) {
             if (disco.get(i).getPtr() == ptr) {
                 relojS = relojS + tiempoAccesoS;
+                tiempoFallos = tiempoFallos + tiempoAccesoS;
                 paginasCambiar.add(disco.remove(i));
             }
         }
@@ -314,6 +320,7 @@ public class MMU {
         }
 
         System.out.println("Tiempo" + relojS);
+        estadisticas();
     }
 
     public Pagina[] getRam() {
@@ -341,9 +348,19 @@ public class MMU {
 
     }
 
-    public void estadistica() {
-        tiempoFallosP = (tiempoFallos / relojS) * 100;
+    public void estadisticas() {
+        
         cantidadProcesos = procesos.size();
+        ramUsed();
+        VirtualMemoryUsed();
+        calcularMemoriaFrag();
+        tiempoFallosP = (tiempoFallos / relojS) * 100;
+    
+ 
+        System.out.println("tfallos" + tiempoFallos);
+         System.out.println("re" + relojS);
+        
+        System.out.println("tiempoFallosP  " + (tiempoFallos / relojS) * 100);
     }
 
     public void calcularMemoriaFrag() {
@@ -399,11 +416,11 @@ public class MMU {
         this.sizePage = sizePage;
     }
 
-    public int getRelojS() {
+    public double getRelojS() {
         return relojS;
     }
 
-    public int getTiempoFallos() {
+    public double getTiempoFallos() {
         return tiempoFallos;
     }
 

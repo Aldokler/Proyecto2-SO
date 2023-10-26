@@ -18,10 +18,10 @@ public class Pagina {
     private int ptr;
     private double size;
     private Date time;
-    private int Stime;
+    private double Stime;
     private int D_ADDR;
 
-    public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, double size, Date time, int Stime, int D_ADDR) {
+    public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, double size, Date time, double Stime, int D_ADDR) {
         this.PID = PID;
         this.ID = ID;
         this.DireccionF = DireccionF;
@@ -98,11 +98,11 @@ public class Pagina {
         this.size = size;
     }
 
-    public int getStime() {
+    public double getStime() {
         return Stime;
     }
 
-    public void setStime(int Stime) {
+    public void setStime(double Stime) {
         this.Stime = Stime;
     }
 
