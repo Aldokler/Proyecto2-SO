@@ -45,7 +45,7 @@ public class MRUAlgoritmo extends Al{
     }
 
     @Override
-    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas) {
+    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas, int instruccionCount) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

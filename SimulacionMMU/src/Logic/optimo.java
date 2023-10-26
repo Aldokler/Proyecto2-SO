@@ -14,7 +14,7 @@ import java.util.Queue;
  */
 public class optimo extends Al{
     @Override
-    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas) {
+    public int cambiarPaginas(ArrayList<Integer[]> instrucciones, Pagina[] paginas, int instruccionCount) {
         return 0;
     }
    
