@@ -22,7 +22,9 @@ public class Main {
         //Preparacion.main(args);
         MMU m = new MMU(new FIFO());
         for (int i = 0; i < 101; i++) {
+         
             m.New(1, 4096);
+             
 
         }
 
@@ -53,16 +55,42 @@ public class Main {
         System.out.println(m.getnPaginaDisco());
         System.out.println(m.getnPaginaRam());*/
 
+        m.delete(1);
+         
+
+        m.New(5, 4096);
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());
+            } else {
+                System.out.println("null");
             }
 
         }
+        m.New(5, 4096 + 4096 + 4096);
+        for (Pagina p : m.getRam()) {
+            if (p != null) {
+                System.out.println(p.getID());
+            } else {
+                System.out.println("null");
+            }
 
-        m.delete(1);
+        }
+        m.New(5, 4096);
+        for (Pagina p : m.getRam()) {
+            if (p != null) {
+                System.out.println(p.getID());
+            } else {
+                System.out.println("null");
+            }
 
-       m.New(5, 4096+4096);
+        }
+        
+      
+       m.delete(103);
+      
+       m.New(6, 4096*3+1800);
+        m.kill(6);
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());
