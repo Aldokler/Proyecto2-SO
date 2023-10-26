@@ -607,13 +607,13 @@ public class Simulacion extends javax.swing.JFrame {
                             for (int p = 0; p < OtherRam.length; p++, contadorFila++) {
                                 if (OtherRam[p] != null){
                                     Object[] rowData1 = {
-                                        OptRam[p].getID(),
-                                        OptRam[p].getPID(),
+                                        OtherRam[p].getID(),
+                                        OtherRam[p].getPID(),
                                         "X",
-                                        OptRam[p].getID(),
+                                        OtherRam[p].getID(),
                                         p,
                                         null,
-                                        (OptMMU.getRelojS() - OptRam[p].getStime()) + "s",
+                                        (OtherMMU.getRelojS() - OtherRam[p].getStime()) + "s",
                                         null
                                     };
                                     if (algoritmo == 2 || algoritmo == 3) {
@@ -631,9 +631,9 @@ public class Simulacion extends javax.swing.JFrame {
                                     }
                                     OtherRenderer.setRGB(pageColor);
                                     for (int j = 0; j < 8; j++) {
-                                        OptRenderer.setColumn(j);
-                                        instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
-                                        ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                        OtherRenderer.setColumn(j);
+                                        instance.OtherMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
+                                        ((AbstractTableModel) instance.OtherMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
                                     }
                                 } else {
                                     contadorFila--;
@@ -664,9 +664,9 @@ public class Simulacion extends javax.swing.JFrame {
                                 }
                                 OtherRenderer.setRGB(pageColor);
                                 for (int j = 0; j < 8; j++) {
-                                    OptRenderer.setColumn(j);
-                                    instance.OptMMUTable.getColumnModel().getColumn(j).setCellRenderer(OptRenderer);
-                                    ((AbstractTableModel) instance.OptMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
+                                    OtherRenderer.setColumn(j);
+                                    instance.OtherMMUTable.getColumnModel().getColumn(j).setCellRenderer(OtherRenderer);
+                                    ((AbstractTableModel) instance.OtherMMUTable.getModel()).fireTableCellUpdated(contadorFila, j);
                                 }
 
                                 contadorFila++;
