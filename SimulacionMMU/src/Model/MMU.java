@@ -159,7 +159,7 @@ public class MMU {
                 System.out.println("IDS" +  IDs.size()  + "  "  + IDs.get(0));
 
                 int indiceRam = 0;
-                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
+                while (!IDs.isEmpty() && indiceRam < ram.length - 1) {
 
                     if (ram[indiceRam] != null) {
                         Integer i = ram[indiceRam].getID();
@@ -217,7 +217,7 @@ public class MMU {
 
                 }
 
-                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
+                while (!IDs.isEmpty() && indiceRam < ram.length - 1) {
 
                     if (ram[indiceRam] != null) {
                         Integer i = ram[indiceRam].getID();
@@ -273,7 +273,7 @@ public class MMU {
 
                 }
 
-                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
+                while (!IDs.isEmpty() && indiceRam < ram.length - 1) {
 
                     if (ram[indiceRam] != null) {
                         Integer i = ram[indiceRam].getID();

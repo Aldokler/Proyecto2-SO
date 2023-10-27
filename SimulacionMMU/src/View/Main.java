@@ -20,10 +20,10 @@ public class Main {
      */
     public static void main(String[] args) {
         //Preparacion.main(args);
-
+/*
         MMU m = new MMU(new FIFO());
         System.out.println("r " + m.getRelojS());
-        for (int i = 0; i < 99; i++) {
+        for (int i = 0; i < 15; i++) {
 
             m.New(1, 4096);
 
@@ -33,7 +33,7 @@ public class Main {
        // m.delete(100);
 
         System.out.println("r ui");
-        /*
+        
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());
@@ -41,10 +41,10 @@ public class Main {
                 System.out.println("null");
             }
         }
-        */
-       
         
        
+        
+       */
 
 //        for (Pagina p : m.getRam()) {
 //            if (p != null) {

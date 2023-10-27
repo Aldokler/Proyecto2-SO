@@ -9,6 +9,7 @@ import Logic.MRUAlgoritmo;
 import Logic.RandomAlgorithm;
 import Logic.optimo;
 import Model.MMU;
+import Model.MMUu;
 import Model.Pagina;
 import Model.Proceso;
 import java.awt.Color;
@@ -361,8 +362,8 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MMU OptMMU = new MMU(programa);
-                MMU OtherMMU = new MMU(algoritmo);
+                MMUu OptMMU = new MMUu(new optimo());
+                MMUu OtherMMU = new MMUu(algoritmo);
 
                 Simulacion instance = new Simulacion();
                 instance.setVisible(true);
@@ -377,54 +378,7 @@ public class Simulacion extends javax.swing.JFrame {
                 instance.OptMMUTable.setDefaultRenderer(Object.class, OptMMURenderer);
                 instance.OtherRamTable.setDefaultRenderer(Object.class, OtherRamRenderer);
                 instance.OtherMMUTable.setDefaultRenderer(Object.class, OtherMMURenderer);
-
-                Object[] MMUModel = {"PAGE ID", "ID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"};
-                Object[] StatsModel = {"Procesos", "Operaciones", "Tiempo", "RAM KB", "RAM %", "V-RAM KB", "V-RAM %", "Págs en uso", "Págs libres", "Thrashing s", "Thrashing %", "Fragmentación"};
-
-                instance.OptMMUModel.addColumn("PAGE ID");
-                instance.OptMMUModel.addColumn("ID");
-                instance.OptMMUModel.addColumn("Loaded");
-                instance.OptMMUModel.addColumn("L-ADDR");
-                instance.OptMMUModel.addColumn("M-ADDR");
-                instance.OptMMUModel.addColumn("D-ADDR");
-                instance.OptMMUModel.addColumn("TIME");
-                instance.OptMMUModel.addColumn("MARK");
-
-                instance.OptStatsModel.addColumn("Procesos");
-                instance.OptStatsModel.addColumn("Operaciones");
-                instance.OptStatsModel.addColumn("Tiempo");
-                instance.OptStatsModel.addColumn("RAM KB");
-                instance.OptStatsModel.addColumn("RAM %");
-                instance.OptStatsModel.addColumn("V-RAM KB");
-                instance.OptStatsModel.addColumn("V-RAM %");
-                instance.OptStatsModel.addColumn("Págs en uso");
-                instance.OptStatsModel.addColumn("Págs libres");
-                instance.OptStatsModel.addColumn("Thrashing s");
-                instance.OptStatsModel.addColumn("Thrashing %");
-                instance.OptStatsModel.addColumn("Fragmentación");
-
-                instance.OtherMMUModel.addColumn("PAGE ID");
-                instance.OtherMMUModel.addColumn("ID");
-                instance.OtherMMUModel.addColumn("Loaded");
-                instance.OtherMMUModel.addColumn("L-ADDR");
-                instance.OtherMMUModel.addColumn("M-ADDR");
-                instance.OtherMMUModel.addColumn("D-ADDR");
-                instance.OtherMMUModel.addColumn("TIME");
-                instance.OtherMMUModel.addColumn("MARK");
-
-                instance.OtherStatsModel.addColumn("Procesos");
-                instance.OtherStatsModel.addColumn("Operaciones");
-                instance.OtherStatsModel.addColumn("Tiempo");
-                instance.OtherStatsModel.addColumn("RAM KB");
-                instance.OtherStatsModel.addColumn("RAM %");
-                instance.OtherStatsModel.addColumn("V-RAM KB");
-                instance.OtherStatsModel.addColumn("V-RAM %");
-                instance.OtherStatsModel.addColumn("Págs en uso");
-                instance.OtherStatsModel.addColumn("Págs libres");
-                instance.OtherStatsModel.addColumn("Thrashing s");
-                instance.OtherStatsModel.addColumn("Thrashing %");
-                instance.OtherStatsModel.addColumn("Fragmentación");
-
+                
                 // Configuración del temporizador para actualizar la interfaz a un ritmo de 70bpm (857)
                 timer = new Timer(2500, new ActionListener() {
                     int page = 0;
@@ -448,6 +402,7 @@ public class Simulacion extends javax.swing.JFrame {
                                 size = programa.get(i)[2];
                             }
                             OptMMU.setInstruccionCounter(i);
+                            System.out.println("Instruccion " + instruction + "  param " + param + "  size " + size);
                             switch (instruction) {
                                 case 1 -> {
                                     OptMMU.New(param, size);
@@ -475,8 +430,17 @@ public class Simulacion extends javax.swing.JFrame {
                              */
                             Pagina[] OptRam = OptMMU.getRam();
                             ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
+                            for (Pagina p : OptMMU.getRam()) {
+                                if (p != null) {
+                                    System.out.println(p.getID());
+                                } else {
+                                    System.out.println("null");
+                                }
+                            }
                             for (int p = 0; p < OptRam.length; p++) {
                                 page = p;
+                                OptRamRenderer.setRow(page / 20);
+                                OptRamRenderer.setColumn(page % 20);
                                 if (OptRam[p] != null) {
                                     int procesoID = OptRam[p].getPID();
                                     for (Proceso proceso : OptProcessList) {
@@ -485,24 +449,18 @@ public class Simulacion extends javax.swing.JFrame {
                                             break;
                                         }
                                     }
-                                    OptRamRenderer.setRow(page / 20);
-                                    OptRamRenderer.setColumn(page % 20);
-                                    OptRamRenderer.setRGB(pageColor);
-                                    //instance.OptRamTable.setDefaultRenderer(Object.class, new CustomCellRenderer(pageColor));
                                     instance.OptRamTable.setValueAt(procesoID, page / 20, page % 20);
-                                    instance.OptRamTable.repaint(instance.OptRamTable.getCellRect(page/20, page%20, false));
                                 } else {
-                                    OptRamRenderer.setRow(page / 20);
-                                    OptRamRenderer.setColumn(page % 20);
-                                    OptRamRenderer.setRGB(new Color(255,255,255));
-                                    //instance.OptRamTable.setDefaultRenderer(Object.class, new CustomCellRenderer(pageColor));
+                                    pageColor = new Color(255, 255, 255);
                                     instance.OptRamTable.setValueAt("", page / 20, page % 20);
-                                    instance.OptRamTable.repaint(instance.OptRamTable.getCellRect(page/20, page%20, false));
                                 }
+                                OptRamRenderer.setRGB(pageColor);
+                                instance.OptRamTable.repaint(instance.OptRamTable.getCellRect(page / 20, page % 20, false));
                             }
                             ArrayList<Pagina> OptDisk = OptMMU.getDisco();
-                            for (int j = 0; j < instance.OptMMUModel.getRowCount(); j++) {
-                                instance.OptMMUModel.removeRow(j);
+                            int filas = instance.OptMMUModel.getRowCount();
+                            for (int j = 0; j < filas; j++) {
+                                instance.OptMMUModel.removeRow(0);
                             }
                             for (int p = 0; p < OptRam.length; p++, contadorFila++) {
                                 if (OptRam[p] != null) {
@@ -602,7 +560,9 @@ public class Simulacion extends javax.swing.JFrame {
                             Pagina[] OtherRam = OtherMMU.getRam();
                             ArrayList<Proceso> OtherProcessList = OtherMMU.getProcesos();
                             for (int p = 0; p < OtherRam.length; p++) {
-                                    page = p;
+                                page = p;
+                                OtherRamRenderer.setRow(page / 20);
+                                OtherRamRenderer.setColumn(page % 20);
                                 if (OtherRam[p] != null) {
                                     int procesoID = OtherRam[p].getPID();
                                     for (Proceso proceso : OtherProcessList) {
@@ -611,24 +571,18 @@ public class Simulacion extends javax.swing.JFrame {
                                             break;
                                         }
                                     }
-                                    OtherRamRenderer.setRow(page / 20);
-                                    OtherRamRenderer.setColumn(page % 20);
-                                    OtherRamRenderer.setRGB(pageColor);
-                                    //instance.OtherRamTable.setDefaultRenderer(Object.class, new CustomCellRenderer(pageColor));
                                     instance.OtherRamTable.setValueAt(procesoID, page / 20, page % 20);
-                                    instance.OtherRamTable.repaint(instance.OtherRamTable.getCellRect(page/20, page%20, false));
                                 } else {
-                                    OtherRamRenderer.setRow(page / 20);
-                                    OtherRamRenderer.setColumn(page % 20);
-                                    OtherRamRenderer.setRGB(new Color(255,255,255));
-                                    //instance.OptRamTable.setDefaultRenderer(Object.class, new CustomCellRenderer(pageColor));
+                                    pageColor = new Color(255, 255, 255);
                                     instance.OtherRamTable.setValueAt("", page / 20, page % 20);
-                                    instance.OtherRamTable.repaint(instance.OtherRamTable.getCellRect(page/20, page%20, false));
                                 }
+                                OtherRamRenderer.setRGB(pageColor);
+                                instance.OtherRamTable.repaint(instance.OtherRamTable.getCellRect(page / 20, page % 20, false));
                             }
                             ArrayList<Pagina> OtherDisk = OtherMMU.getDisco();
-                            for (int j = 0; j < instance.OtherMMUModel.getRowCount(); j++) {
-                                instance.OtherMMUModel.removeRow(j);
+                            int filas1 = instance.OtherMMUModel.getRowCount();
+                            for (int j = 0; j < filas1; j++) {
+                                instance.OtherMMUModel.removeRow(0);
                             }
                             for (int p = 0; p < OtherRam.length; p++, contadorFila++) {
                                 if (OtherRam[p] != null) {
@@ -807,8 +761,11 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel labelOtherStats;
     // End of variables declaration//GEN-END:variables
 
-    DefaultTableModel OptMMUModel = new DefaultTableModel();
-    DefaultTableModel OptStatsModel = new DefaultTableModel();
-    DefaultTableModel OtherMMUModel = new DefaultTableModel();
-    DefaultTableModel OtherStatsModel = new DefaultTableModel();
+    Object[] MMUModel = {"PAGE ID", "ID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"};
+    Object[] StatsModel = {"Procesos", "Operaciones", "Tiempo", "RAM KB", "RAM %", "V-RAM KB", "V-RAM %", "Págs en uso", "Págs libres", "Thrashing s", "Thrashing %", "Fragmentación"};
+
+    DefaultTableModel OptMMUModel = new DefaultTableModel(MMUModel, 0);
+    DefaultTableModel OptStatsModel = new DefaultTableModel(StatsModel, 0);
+    DefaultTableModel OtherMMUModel = new DefaultTableModel(MMUModel, 0);
+    DefaultTableModel OtherStatsModel = new DefaultTableModel(StatsModel, 0);
 }

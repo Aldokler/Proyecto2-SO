@@ -2,6 +2,8 @@ package Model;
 
 import Logic.Al;
 import Logic.FIFO;
+import Logic.MRUAlgoritmo;
+import Logic.RandomAlgorithm;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class MMUu {
     private int nPaginaRam = 0;
     private int nPaginaDisco = 0;
     private int cantidadProcesos = 0;
+    private int instruccionCounter = 0;
 
     private Queue<Pagina> cola = new LinkedList<Pagina>();
     private Al algoritmo;
@@ -49,6 +52,30 @@ public class MMUu {
 
     public MMUu(Al algoritmo) {
         this.algoritmo = algoritmo;
+    }
+    
+    public MMUu(int opt) {
+        switch(opt){
+            case 1 -> {
+                this.algoritmo = new FIFO();
+            }
+            case 2 -> {
+            }
+            case 3 -> {
+                this.algoritmo = new MRUAlgoritmo();
+            }
+            case 4 -> {
+                this.algoritmo = new RandomAlgorithm();
+            }
+        }
+    }
+    
+    public int getInstruccionCounter() {
+        return instruccionCounter;
+    }
+
+    public void setInstruccionCounter(int instruccionCounter) {
+        this.instruccionCounter = instruccionCounter;
     }
 
     private ArrayList<Integer> espacioRam(int n) {
@@ -93,7 +120,7 @@ public class MMUu {
 
         int nPaginacion = nPaginas - espacios.size();
         int nAgregar = nPaginacion;
-        while (espacios.size() > 0) {
+        while (!espacios.isEmpty()) {
             int e = espacios.get(0);
 
             Date date = new Date();
