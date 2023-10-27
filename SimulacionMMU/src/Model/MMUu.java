@@ -101,7 +101,7 @@ public class MMUu {
                 cola.add(page);
                 sizeKB = sizeKB - sizePage;
                 nPaginas--;
-
+                
                 System.out.println("paginas quedan  " + nPaginas);
             }
             index++;
