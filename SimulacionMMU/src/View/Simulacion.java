@@ -393,6 +393,7 @@ public class Simulacion extends javax.swing.JFrame {
                             if (i >= programa.size()) {
                                 System.out.println("Simulación terminada");
                                 timer.stop();
+                                return;
                             }
 
                             int instruction = programa.get(i)[0];
@@ -529,7 +530,7 @@ public class Simulacion extends javax.swing.JFrame {
                             }
                             Object[] rowData = {
                                 OptMMU.getProcesos().size(),
-                                i,
+                                i+1,
                                 OptMMU.getRelojS(),
                                 OptMMU.getMemoriaRamUsada(),
                                 OptMMU.getMemoriaRamUsadaP(),
@@ -657,7 +658,7 @@ public class Simulacion extends javax.swing.JFrame {
                             }
                             Object[] rowData1 = {
                                 OtherMMU.getProcesos().size(),
-                                i,
+                                i+1,
                                 OtherMMU.getRelojS(),
                                 OtherMMU.getMemoriaRamUsada(),
                                 OtherMMU.getMemoriaRamUsadaP(),
