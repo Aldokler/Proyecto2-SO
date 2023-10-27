@@ -99,6 +99,91 @@ public class MMUu {
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
         relojS = relojS + (tiempoAccesoS * nPaginas);
         tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
+        System.out.println("paginas   " + nPaginas);
+        int seed = seedSingleton.getInstance().getSeed();
+        Random rand = new Random(seed);
+        if (seed == 0) {
+            rand = new Random();
+        }
+        boolean agreguelo = true;
+        for (Proceso p : procesos) {
+            if (p.getPid() == pid) {
+                agreguelo = false;
+                break;
+            }
+        }
+        if (agreguelo) {
+            Proceso process = new Proceso(pid, (float) sizeKB, new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)));
+            procesos.add(process);
+        }
+
+        int index = 0;
+        while (nPaginas > 0 && index < ram.length) {
+
+            if (ram[index] == null) {
+                Date date = new Date();
+                Pagina page = new Pagina(pid, pages, index, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+                ram[index] = page;
+                pages++;
+                cola.add(page);
+                sizeKB = sizeKB - sizePage;
+                nPaginas--;
+                
+                System.out.println("paginas quedan  " + nPaginas);
+            }
+            index++;
+
+        }
+
+        ArrayList<Integer> IDs = new ArrayList<>();
+        if (algoritmo instanceof FIFO) {
+
+            while (nPaginas > 0) {
+                int ID = algoritmo.cambiarPaginas(cola);
+                IDs.add(ID);
+                nPaginas--;
+
+            }
+        } else {
+
+            while (nPaginas > 0) {
+                int ID = algoritmo.cambiarPaginas(ram);
+                IDs.add(ID);
+                nPaginas--;
+
+            }
+        }
+        System.out.println("paginas 0  " + nPaginas);
+
+        for (Integer ID : IDs) {
+            for (int i = 0; i < ram.length; i++) {
+                if (ram[i] != null) {
+                    if (ram[i].getID() == ID) {
+                        disco.add(ram[i]);
+                        Date date = new Date();
+                        Pagina page = new Pagina(pid, pages, i, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+                        ram[i] = page;
+                        pages++;
+                        cola.add(page);
+                        sizeKB = sizeKB - sizePage;
+                        break;
+
+                    }
+                }
+            }
+        }
+        ptrs++;
+        estadisticas();
+
+        return ptrs - 1;
+
+    }
+
+    public int Neww(int pid, float size) {
+        double sizeKB = size / 1024;
+        int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
+        relojS = relojS + (tiempoAccesoS * nPaginas);
+        tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
         ArrayList<Integer> espacios = espacioRam(nPaginas);
 
         int seed = seedSingleton.getInstance().getSeed();
@@ -152,11 +237,10 @@ public class MMUu {
 
             }
         }
-        
-        while (nAgregar > 0) {            
-            
+
+        while (nAgregar > 0) {
+
         }
-        
 
         ptrs++;
         estadisticas();
