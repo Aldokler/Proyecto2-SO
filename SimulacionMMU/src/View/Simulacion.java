@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.AbstractTableModel;
@@ -380,7 +381,7 @@ public class Simulacion extends javax.swing.JFrame {
                 instance.OtherMMUTable.setDefaultRenderer(Object.class, OtherMMURenderer);
                 
                 // Configuración del temporizador para actualizar la interfaz a un ritmo de 70bpm (857)
-                timer = new Timer(2500, new ActionListener() {
+                timer = new Timer(857, new ActionListener() {
                     int page = 0;
                     Color pageColor = new Color(0, 0, 0);
                     int i = 0;
@@ -393,6 +394,7 @@ public class Simulacion extends javax.swing.JFrame {
                             if (i >= programa.size()) {
                                 System.out.println("Simulación terminada");
                                 timer.stop();
+                                JOptionPane.showConfirmDialog(instance.rootPane, "Simulación Terminada", "Finish", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
                                 return;
                             }
 
@@ -403,7 +405,6 @@ public class Simulacion extends javax.swing.JFrame {
                                 size = programa.get(i)[2];
                             }
                             OptMMU.setInstruccionCounter(i);
-                            System.out.println("Instruccion " + instruction + "  param " + param + "  size " + size);
                             switch (instruction) {
                                 case 1 -> {
                                     OptMMU.New(param, size);
@@ -431,13 +432,6 @@ public class Simulacion extends javax.swing.JFrame {
                              */
                             Pagina[] OptRam = OptMMU.getRam();
                             ArrayList<Proceso> OptProcessList = OptMMU.getProcesos();
-                            for (Pagina p : OptMMU.getRam()) {
-                                if (p != null) {
-                                    System.out.println(p.getID());
-                                } else {
-                                    System.out.println("null");
-                                }
-                            }
                             for (int p = 0; p < OptRam.length; p++) {
                                 page = p;
                                 OptRamRenderer.setRow(page / 20);
@@ -680,7 +674,6 @@ public class Simulacion extends javax.swing.JFrame {
 #######################################################################################################################################################
                              */
                             i++;
-                            System.out.println("Instrucción " + i + " procesada");
                         });
                     }
                 });
