@@ -8,6 +8,7 @@ import Logic.Al;
 import Logic.FIFO;
 import Logic.MRUAlgoritmo;
 import Logic.RandomAlgorithm;
+import Logic.optimo;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -58,7 +59,12 @@ public class MMU {
     public MMU(Al algoritmo) {
         this.algoritmo = algoritmo;
     }
-
+    
+    public MMU(ArrayList<Integer[]>  instrucciones) {
+        this.instrucciones = instrucciones;
+        this.algoritmo = new optimo();
+    }
+    
     public MMU(int opt) {
         switch(opt){
             case 1 -> {
@@ -73,10 +79,6 @@ public class MMU {
                 this.algoritmo = new RandomAlgorithm();
             }
         }
-    }
-    
-    public MMU(ArrayList<Integer[]> instrucciones) {
-        this.instrucciones = instrucciones;
     }
 
     public int getInstruccionCounter() {
@@ -105,8 +107,6 @@ public class MMU {
     }
 
     public int New(int pid, float size) {
-
-        
         // System.out.println("PID " + pid);
         double sizeKB = size / 1024;
         //System.out.println("size" + sizeKB);
@@ -159,12 +159,12 @@ public class MMU {
                 System.out.println("IDS" +  IDs.size()  + "  "  + IDs.get(0));
 
                 int indiceRam = 0;
-                while (IDs.size() > 0) {
+                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
 
                     if (ram[indiceRam] != null) {
-
-                        if (ram[indiceRam].getID() == IDs.get(0)) {
-                            IDs.remove(0);
+                        Integer i = ram[indiceRam].getID();
+                        if (IDs.contains(ram[indiceRam].getID())) {
+                            IDs.remove(i);
 
                             disco.add(ram[indiceRam]);
                             ram[indiceRam] = null;
@@ -173,6 +173,7 @@ public class MMU {
                     }
 
                     indiceRam++;
+
                 }
 
                 for (int i = 0; i < ram.length - 1; i++) {
@@ -192,9 +193,64 @@ public class MMU {
                 //cearDate date = new Date();
                 // System.out.println("pagiiFIFO  " + ID);
                 //agregamos
-            } else {
-                System.out.println("No FIFO");
+            } else if(algoritmo instanceof optimo){
 
+                int nPaginasCambiar = nPaginas - espacios.size();
+                ArrayList<Integer> IDs = new ArrayList<>();
+
+                while (nPaginasCambiar > 0) {
+                    //  System.out.println("PAGINAAAA  " + pages);
+
+                    int ID = algoritmo.cambiarPaginas(instrucciones, ram, instruccionCounter);
+                    IDs.add(ID);
+                    nPaginasCambiar--;
+
+                }
+
+                int indiceRam = 0;
+
+
+                System.out.println("paginasIDAlg");
+                for (Integer p : IDs) {
+
+                    System.out.println(p);
+
+                }
+
+                while (IDs.size() > 0 && indiceRam < ram.length - 1) {
+
+                    if (ram[indiceRam] != null) {
+                        Integer i = ram[indiceRam].getID();
+                        if (IDs.contains(ram[indiceRam].getID())) {
+                            IDs.remove(i);
+
+                            disco.add(ram[indiceRam]);
+                            ram[indiceRam] = null;
+
+                        }
+                    }
+
+                    indiceRam++;
+
+                }
+
+                for (int i = 0; i < ram.length - 1; i++) {
+
+                    if (ram[i] == null) {
+                        Date date = new Date();
+                        Pagina page = new Pagina(pid, pages, indiceRam, true, ptrs, sizeKB, date, this.relojS, rand.nextInt());
+                        ram[i] = page;
+                        pages++;
+                        cola.add(page);
+                        sizeKB = sizeKB - sizePage;
+
+                    }
+
+                }
+            }
+            
+            else {
+                System.out.println("No FIFO");
                 int nPaginasCambiar = nPaginas - espacios.size();
                 ArrayList<Integer> IDs = new ArrayList<>();
 
@@ -251,7 +307,6 @@ public class MMU {
             }
 
         } else {
-            System.out.println("NO AL");
             while (espacios.size() > 0) {
                 int e = espacios.get(0);
 
@@ -351,7 +406,15 @@ public class MMU {
                         indexs.add(ID);
                         sizePaginasD--;
                     }
-                } else {
+                } else if(algoritmo instanceof optimo) {
+                while (sizePaginasD > 0) {
+                        int ID = algoritmo.cambiarPaginas(instrucciones, ram, instruccionCounter);
+                        indexs.add(ID);
+                        sizePaginasD--;
+                }
+                }
+                
+                else {
                     while (sizePaginasD > 0) {
                         int ID = algoritmo.cambiarPaginas(ram);
                         indexs.add(ID);

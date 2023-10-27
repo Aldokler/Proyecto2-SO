@@ -33,7 +33,7 @@ public class Main {
        // m.delete(100);
 
         System.out.println("r ui");
-
+        /*
         for (Pagina p : m.getRam()) {
             if (p != null) {
                 System.out.println(p.getID());
@@ -41,6 +41,7 @@ public class Main {
                 System.out.println("null");
             }
         }
+        */
        
         
        
