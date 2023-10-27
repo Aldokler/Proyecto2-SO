@@ -104,6 +104,7 @@ public class MMUu {
     public int New(int pid, float size) {
         double sizeKB = size / 1024;
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
+        if (nPaginas == 0) nPaginas = 1;
         relojS = relojS + (tiempoAccesoS * nPaginas);
         tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
         System.out.println("paginas   " + nPaginas);
