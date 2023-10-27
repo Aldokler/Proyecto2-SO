@@ -126,6 +126,9 @@ public class MMUu {
             }
         }
         
+        while (nAgregar > 0) {            
+            
+        }
         
 
         ptrs++;
