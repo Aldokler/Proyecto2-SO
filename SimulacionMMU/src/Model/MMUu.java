@@ -104,10 +104,9 @@ public class MMUu {
     public int New(int pid, float size) {
         double sizeKB = size / 1024;
         int nPaginas = (int) ((sizeKB + sizePage - 1) / sizePage);
-        if (nPaginas == 0) nPaginas = 1;
+        nPaginas++;
         relojS = relojS + (tiempoAccesoS * nPaginas);
         tiempoFallos = tiempoFallos + (tiempoAccesoS * nPaginas);
-        System.out.println("paginas   " + nPaginas);
         int seed = seedSingleton.getInstance().getSeed();
         Random rand = new Random(seed);
         if (seed == 0) {
@@ -137,7 +136,6 @@ public class MMUu {
                 sizeKB = sizeKB - sizePage;
                 nPaginas--;
                 
-                System.out.println("paginas quedan  " + nPaginas);
             }
             index++;
 
@@ -168,7 +166,6 @@ public class MMUu {
 
             }
         }
-        System.out.println("paginas 0  " + nPaginas);
 
         for (Integer ID : IDs) {
             for (int i = 0; i < ram.length; i++) {
@@ -309,12 +306,10 @@ public class MMUu {
     }
 
     public void use(int ptr) {
-        System.out.println("RelojI " + relojS);
         for (Pagina pagina : ram) {
             if (pagina != null) {
                 if (pagina.getPtr() == ptr) {
                     relojS++;
-                    System.out.println("Reloj1Exi  " + relojS);
                 }
             }
 
@@ -325,7 +320,6 @@ public class MMUu {
             if (disco.get(i).getPtr() == ptr) {
                 relojS = relojS + tiempoAccesoS;
                 tiempoFallos = tiempoFallos + tiempoAccesoS;
-                System.out.println("Tfallas " + tiempoFallos);
                 paginasCambiar.add(disco.remove(i));
             }
         }
@@ -395,8 +389,6 @@ public class MMUu {
                 }
             }
         }
-
-        System.out.println("RelojF  " + relojS);
         estadisticas();
     }
 
