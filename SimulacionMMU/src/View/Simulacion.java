@@ -362,7 +362,7 @@ public class Simulacion extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MMUu OptMMU = new MMUu(new optimo());
+                MMUu OptMMU = new MMUu(programa);
                 MMUu OtherMMU = new MMUu(algoritmo);
 
                 Simulacion instance = new Simulacion();

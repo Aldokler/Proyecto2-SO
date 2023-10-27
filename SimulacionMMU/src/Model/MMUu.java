@@ -4,6 +4,7 @@ import Logic.Al;
 import Logic.FIFO;
 import Logic.MRUAlgoritmo;
 import Logic.RandomAlgorithm;
+import Logic.optimo;
 import Logic.seedSingleton;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -49,7 +50,13 @@ public class MMUu {
     private Queue<Pagina> cola = new LinkedList<Pagina>();
     private Al algoritmo;
     int II;
-
+    
+    private ArrayList<Integer[]> instrucciones ;
+    
+    public MMUu(ArrayList<Integer[]>  instrucciones) {
+        this.instrucciones = instrucciones;
+        this.algoritmo = new optimo();
+    }
     public MMUu(Al algoritmo) {
         this.algoritmo = algoritmo;
     }
@@ -144,7 +151,14 @@ public class MMUu {
                 nPaginas--;
 
             }
-        } else {
+        } else if(algoritmo instanceof optimo){
+            while (nPaginas > 0) {
+                    int ID = algoritmo.cambiarPaginas(instrucciones, ram, instruccionCounter);
+                    IDs.add(ID);
+                    nPaginas--;
+
+                }
+        }else {
 
             while (nPaginas > 0) {
                 int ID = algoritmo.cambiarPaginas(ram);
@@ -219,6 +233,16 @@ public class MMUu {
 
         }
         if (algoritmo instanceof FIFO) {
+
+            ArrayList<Integer> IDs = new ArrayList<>();
+            while (nPaginacion > 0) {
+                int ID = algoritmo.cambiarPaginas(cola);
+                IDs.add(ID);
+                nPaginacion--;
+
+            }
+
+        } else if (algoritmo instanceof optimo) {
 
             ArrayList<Integer> IDs = new ArrayList<>();
             while (nPaginacion > 0) {
