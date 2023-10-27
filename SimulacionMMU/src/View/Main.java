@@ -6,7 +6,7 @@ package View;
 
 import Logic.FIFO;
 import Logic.RandomAlgorithm;
-import Model.MMU;
+import Model.MMUu;
 import Model.Pagina;
 
 /**
@@ -21,18 +21,32 @@ public class Main {
     public static void main(String[] args) {
         //Preparacion.main(args);
 
-        MMU m = new MMU(new FIFO());
+        MMUu m = new MMUu(new FIFO());
         System.out.println("r " + m.getRelojS());
         for (int i = 0; i < 99; i++) {
 
-            m.New(1, 4096);
+          m.New(1, 4096);
+     
 
         }
-        m.New(1, 4096*2);
+        m.New(1, 4096*2+1800);
+        m.use(1);
+        m.use(1);
+        m.use(2);
+        m.delete(100);
+        m.use(3);
+        m.New(6, 4096*2+2001);
+        m.kill(6);
+        for (Pagina p : m.getRam()) {
+            if (p != null) {
+                System.out.println(p.getID());
+            } else {
+                System.out.println("null");
+            }
+        }
+        
 
        // m.delete(100);
-
-        System.out.println("r ui");
         /*
         for (Pagina p : m.getRam()) {
             if (p != null) {
@@ -119,7 +133,7 @@ public class Main {
        m.New(6, 4096*3+1800);
         m.kill(6);*/
         
-        Preparacion.main(args);
+     
     }
 
 }
