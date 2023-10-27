@@ -41,6 +41,7 @@ public class Simulacion extends javax.swing.JFrame {
         initComponents();
     }
     private static Timer timer;
+    private static boolean running = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,6 +71,7 @@ public class Simulacion extends javax.swing.JFrame {
         labelOtherStats = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         OtherStats = new javax.swing.JTable();
+        pause = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,6 +207,8 @@ public class Simulacion extends javax.swing.JFrame {
         OtherStats.getTableHeader().setReorderingAllowed(false);
         jScrollPane7.setViewportView(OtherStats);
 
+        pause.setText("Pause");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,7 +222,9 @@ public class Simulacion extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(243, 243, 243)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                .addComponent(pause)
+                .addGap(234, 234, 234)
                 .addComponent(labelOtherMMU)
                 .addGap(288, 288, 288))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -227,12 +233,12 @@ public class Simulacion extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addComponent(jScrollPane6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
                     .addComponent(jScrollPane5)
                     .addComponent(jScrollPane7))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(214, 214, 214)
                 .addComponent(jLabel5)
@@ -254,8 +260,9 @@ public class Simulacion extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(labelOtherMMU))
-                .addGap(15, 15, 15)
+                    .addComponent(labelOtherMMU)
+                    .addComponent(pause))
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                     .addComponent(jScrollPane5))
@@ -677,8 +684,17 @@ public class Simulacion extends javax.swing.JFrame {
                         });
                     }
                 });
-
                 timer.start();
+                instance.pause.addActionListener(e -> {
+                running = !running; // Cambiar el estado de pausa
+                if (running) {
+                    // Pausar el Timer
+                    timer.stop();
+                } else {
+                    // Reanudar el Timer
+                    timer.start();
+                }
+            });
             }
         });
 
@@ -753,6 +769,7 @@ public class Simulacion extends javax.swing.JFrame {
     private javax.swing.JLabel labelOtherMMU;
     private javax.swing.JLabel labelOtherRam;
     private javax.swing.JLabel labelOtherStats;
+    private javax.swing.JButton pause;
     // End of variables declaration//GEN-END:variables
 
     Object[] MMUModel = {"PAGE ID", "ID", "Loaded", "L-ADDR", "M-ADDR", "D-ADDR", "TIME", "MARK"};

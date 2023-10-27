@@ -48,7 +48,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="243" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="242" max="32767" attributes="0"/>
+                  <Component id="pause" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
                   <Component id="labelOtherMMU" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
               </Group>
@@ -59,13 +61,13 @@
                       <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane6" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jScrollPane2" alignment="0" pref="600" max="32767" attributes="0"/>
                       <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane7" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="38" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
@@ -93,8 +95,9 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelOtherMMU" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pause" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane4" pref="514" max="32767" attributes="0"/>
                       <Component id="jScrollPane5" max="32767" attributes="0"/>
@@ -857,6 +860,11 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="pause">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Pause"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
