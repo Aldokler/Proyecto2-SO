@@ -20,6 +20,7 @@ public class Pagina {
     private Date time;
     private double Stime;
     private int D_ADDR;
+    
 
     public Pagina(int PID, int ID, int DireccionF, boolean Marking, int ptr, double size, Date time, double Stime, int D_ADDR) {
         this.PID = PID;
@@ -37,6 +38,8 @@ public class Pagina {
         return PID;
     }
 
+    
+    
     public void setPID(int PID) {
         this.PID = PID;
     }

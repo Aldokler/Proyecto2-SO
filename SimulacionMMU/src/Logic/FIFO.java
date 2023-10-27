@@ -17,6 +17,7 @@ public class FIFO extends Al{
     @Override
     public int cambiarPaginas(Queue<Pagina> paginas) {
         Pagina pagina = paginas.poll();
+        
         return pagina.getID();
     }  
 

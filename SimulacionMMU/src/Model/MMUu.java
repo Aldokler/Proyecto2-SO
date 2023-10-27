@@ -4,6 +4,7 @@ import Logic.Al;
 import Logic.FIFO;
 import Logic.MRUAlgoritmo;
 import Logic.RandomAlgorithm;
+import Logic.SecondChance;
 import Logic.optimo;
 import Logic.seedSingleton;
 import java.awt.Color;
@@ -53,6 +54,7 @@ public class MMUu {
     
     private ArrayList<Integer[]> instrucciones ;
     
+   
     public MMUu(ArrayList<Integer[]>  instrucciones) {
         this.instrucciones = instrucciones;
         this.algoritmo = new optimo();
@@ -67,6 +69,7 @@ public class MMUu {
                 this.algoritmo = new FIFO();
             }
             case 2 -> {
+                this.algoritmo = new SecondChance();
             }
             case 3 -> {
                 this.algoritmo = new MRUAlgoritmo();
@@ -142,7 +145,7 @@ public class MMUu {
         }
 
         ArrayList<Integer> IDs = new ArrayList<>();
-        if (algoritmo instanceof FIFO) {
+        if (algoritmo instanceof FIFO || algoritmo instanceof SecondChance) {
 
             while (nPaginas > 0) {
                 int ID = algoritmo.cambiarPaginas(cola);
@@ -271,8 +274,10 @@ public class MMUu {
     }
 
     public void delete(int ptr) {
+         
         for (int i = 0; i < disco.size(); i++) {
             if (disco.get(i).getPtr() == ptr) {
+                cola.remove(disco.get(i));
                 disco.remove(i);
             }
         }
@@ -280,17 +285,22 @@ public class MMUu {
         for (int i = 0; i < ram.length; i++) {
             if (ram[i] != null) {
                 if (ram[i].getPtr() == ptr) {
+                    cola.remove(ram[i]);
                     ram[i] = null;
                 }
             }
         }
         estadisticas();
+        
+        
 
     }
 
     public void kill(int pid) {
+
         for (int i = 0; i < disco.size(); i++) {
             if (disco.get(i).getPID() == pid) {
+                cola.remove(disco.get(i));
                 disco.remove(i);
             }
         }
@@ -298,11 +308,13 @@ public class MMUu {
         for (int i = 0; i < ram.length; i++) {
             if (ram[i] != null) {
                 if (ram[i].getPID() == pid) {
+                    cola.remove(ram[i]);
                     ram[i] = null;
                 }
             }
         }
         estadisticas();
+        
     }
 
     public void use(int ptr) {
@@ -332,7 +344,7 @@ public class MMUu {
             if (espacios.size() < sizePaginasD) {
                 ArrayList<Integer> indexs = new ArrayList<Integer>();
                 //paginacion
-                if (algoritmo instanceof FIFO) {
+                if (algoritmo instanceof FIFO || algoritmo instanceof SecondChance) {
                     while (sizePaginasD > 0) {
                         int ID = algoritmo.cambiarPaginas(cola);
                         indexs.add(ID);
@@ -358,6 +370,7 @@ public class MMUu {
                             indexs.remove(i);
                             disco.add(ram[indiceRam]);
                             ram[indiceRam] = paginasCambiar.get(0);
+                            ram[indiceRam].setMarking(true);
                             cola.add(paginasCambiar.get(0));
                             paginasCambiar.remove(0);
 
@@ -376,6 +389,7 @@ public class MMUu {
                 while (paginasCambiar.size() > 0) {
                     int e = espacios.get(0);
                     ram[e] = paginasCambiar.get(0);
+                    ram[e].setMarking(true);
                     cola.add(paginasCambiar.get(0));
                     paginasCambiar.remove(0);
                     espacios.remove(0);
