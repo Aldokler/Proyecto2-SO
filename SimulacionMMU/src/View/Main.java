@@ -21,7 +21,7 @@ public class Main {
     public static void main(String[] args) {
         //Preparacion.main(args);
 
-        MMUu m = new MMUu(new FIFO());
+        MMUu m = new MMUu(new RandomAlgorithm());
         System.out.println("r " + m.getRelojS());
         for (int i = 0; i < 99; i++) {
 
